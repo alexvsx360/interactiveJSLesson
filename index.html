@@ -58,6 +58,14 @@
             <p style="text-align: center; margin-top: 30px; font-size: 1.3rem; background: #fff3cd; padding: 20px; border-radius: 15px; border-right: 5px solid #ffc107;">
                 <strong>💪 מטרת השיעור:</strong> בסוף השיעור תדעו לבנות אתר אינטראקטיבי עם JavaScript!
             </p>
+            
+            <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; padding: 20px; border-radius: 15px; margin-top: 30px; text-align: center; box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);">
+                <h4 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">🔍 תזכורת חשובה!</h4>
+                <p style="font-size: 1.1rem; line-height: 1.6;">
+                    כל התוצאות מהקוד מוצגות ב-<strong>Console</strong><br>
+                    לחצו <strong>F12</strong> כדי לפתוח את ה-Developer Tools ולראות את הפלט!
+                </p>
+            </div>
         </div>
 
         <!-- Slide 3: Homework Review -->
@@ -249,6 +257,15 @@ function objectsEqual(obj1, obj2) {
         <!-- Slide 5: Console.log -->
         <div class="slide">
             <h2>Console - החבר הכי טוב שלך בתכנות! 🔍</h2>
+            
+            <div style="background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%); color: white; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: center; box-shadow: 0 5px 20px rgba(33, 150, 243, 0.4);">
+                <h4 style="color: white; font-size: 1.4rem; margin-bottom: 10px;">💡 איפה רואים את התוצאות?</h4>
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    כל הדוגמאות בשיעור מדפיסות ל-<strong>Console</strong> בדפדפן!<br>
+                    <strong>לחצו F12 עכשיו</strong> ותראו את הקסם קורה 🎯<br>
+                    <span style="font-size: 0.95rem; opacity: 0.9;">(בחרו בטאב "Console" אם הוא לא פתוח)</span>
+                </p>
+            </div>
             
             <h3>📝 console.log() - מתחילים פה</h3>
             <p>הדרך הכי פשוטה להדפיס דברים ולראות מה קורה בקוד</p>
@@ -2508,14 +2525,199 @@ printNames(students);</code></pre>
 
         <!-- Slide 15: Homework -->
         <div class="slide">
-            <h2>שיעורי בית</h2>
-            <ol class="homework-list">
-                <li>עמוד HTML עם כפתור.</li>
-                <li>בלחיצה – לשנות טקסט ולהציג הודעה ב־Console.</li>
-                <li>ליצור <strong>Array (מערך)</strong> עם שמות ולהציגם בלולאה.</li>
-                <li>שימוש נכון ב־<code>let</code>, <code>const</code>, ו־<code>function</code>.</li>
-                <li>עיצוב ב־Flexbox.</li>
-            </ol>
+            <h2>📚 שיעורי בית - משימה מקיפה</h2>
+            
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 15px; margin: 20px 0; text-align: center;">
+                <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px;">🎯 המטרה: ליצור עמוד אינטראקטיבי שעובד!</h3>
+                <p style="font-size: 1.2rem;">תשלבו את כל מה שלמדתם היום - HTML, CSS, ו-JavaScript</p>
+            </div>
+            
+            <h3 style="color: #667eea; margin-top: 30px;">📋 דרישות המשימה:</h3>
+            
+            <!-- Task 1 -->
+            <div class="exercise-box" style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 3px solid #4caf50; margin: 20px 0;">
+                <h4 style="color: #2e7d32; font-size: 1.3rem;">1️⃣ מבנה HTML סמנטי</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin: 10px 0;">
+                    צרו עמוד HTML עם מבנה נכון: <code>&lt;main&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;section&gt;</code>
+                </p>
+                <div class="code-section" style="margin: 15px 0;">
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="he" dir="rtl"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;שיעורי בית - JavaScript&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;main class="container"&gt;
+        &lt;header&gt;
+            &lt;h1 id="title"&gt;שלום! ברוכים הבאים 👋&lt;/h1&gt;
+        &lt;/header&gt;
+        
+        &lt;section&gt;
+            &lt;!-- התוכן שלכם כאן --&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+    
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+            
+            <!-- Task 2 -->
+            <div class="exercise-box" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border: 3px solid #2196f3; margin: 20px 0;">
+                <h4 style="color: #1976d2; font-size: 1.3rem;">2️⃣ כפתור אינטראקטיבי + Console</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin: 10px 0;">
+                    הוסיפו כפתור שבלחיצה עליו:
+                </p>
+                <ul style="margin-right: 30px; font-size: 1.1rem;">
+                    <li>✅ משנה את הטקסט בכותרת</li>
+                    <li>✅ מדפיס הודעה ב-Console</li>
+                </ul>
+                <div class="code-section" style="margin: 15px 0;">
+                    <pre><code>&lt;!-- HTML --&gt;
+&lt;button id="myBtn" class="btn"&gt;לחץ עליי!&lt;/button&gt;
+
+&lt;!-- JavaScript --&gt;
+&lt;script&gt;
+const btn = document.getElementById('myBtn');
+const title = document.getElementById('title');
+
+btn.onclick = function() {
+    // שנה את הטקסט
+    title.innerText = "הכפתור נלחץ! 🎉";
+    
+    // הדפס לקונסול
+    console.log("הכפתור נלחץ בהצלחה!");
+    console.log("זמן הלחיצה:", new Date().toLocaleTimeString());
+};
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+            
+            <!-- Task 3 -->
+            <div class="exercise-box" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border: 3px solid #ff9800; margin: 20px 0;">
+                <h4 style="color: #e65100; font-size: 1.3rem;">3️⃣ מערך עם לולאה</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin: 10px 0;">
+                    צרו מערך של שמות והציגו אותם בלולאה (גם ב-Console וגם בעמוד)
+                </p>
+                <div class="code-section" style="margin: 15px 0;">
+                    <pre><code>// יצירת המערך
+const names = ["דני", "שרה", "אלכס", "מיכל", "יוסי"];
+
+// הצגה בקונסול
+console.log("=== רשימת שמות ===");
+for (let i = 0; i < names.length; i++) {
+    console.log(`${i + 1}. ${names[i]}`);
+}
+
+// הצגה בעמוד (אופציונלי)
+const namesList = document.getElementById('namesList');
+for (let name of names) {
+    const li = document.createElement('li');
+    li.innerText = name;
+    namesList.appendChild(li);
+}</code></pre>
+                </div>
+                <p style="background: #fff3cd; padding: 10px; border-radius: 8px; margin-top: 10px;">
+                    💡 <strong>טיפ:</strong> אפשר גם להשתמש ב-<code>forEach()</code> או <code>map()</code>
+                </p>
+            </div>
+            
+            <!-- Task 4 -->
+            <div class="exercise-box" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border: 3px solid #9c27b0; margin: 20px 0;">
+                <h4 style="color: #7b1fa2; font-size: 1.3rem;">4️⃣ שימוש נכון במשתנים</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin: 10px 0;">
+                    השתמשו ב-<code>const</code> לדברים שלא משתנים, ו-<code>let</code> למשתנים שמשתנים
+                </p>
+                <div class="code-section" style="margin: 15px 0;">
+                    <pre><code>// ✅ נכון
+const APP_NAME = "האפליקציה שלי";  // לא משתנה
+const MAX_USERS = 100;              // קבוע
+
+let counter = 0;                    // משתנה
+let currentUser = "אורח";           // משתנה
+
+function incrementCounter() {
+    counter++;  // let מאפשר שינוי
+    console.log("Counter:", counter);
+}
+
+// ❌ לא נכון
+const count = 0;
+count++;  // שגיאה! const לא ניתן לשינוי</code></pre>
+                </div>
+            </div>
+            
+            <!-- Task 5 -->
+            <div class="exercise-box" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); border: 3px solid #e91e63; margin: 20px 0;">
+                <h4 style="color: #c2185b; font-size: 1.3rem;">5️⃣ עיצוב ב-Flexbox</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin: 10px 0;">
+                    עצבו את העמוד עם Flexbox - מרכזו תוכן, סדרו אלמנטים
+                </p>
+                <div class="code-section" style="margin: 15px 0;">
+                    <pre><code>/* styles.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    direction: rtl;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+}
+
+.btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+}</code></pre>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #4caf50 0%, #45a049 100%); color: white; padding: 25px; border-radius: 15px; margin: 30px 0; text-align: center;">
+                <h3 style="color: white; font-size: 1.5rem; margin-bottom: 15px;">✅ רשימת בדיקה (Checklist)</h3>
+                <ul style="text-align: right; font-size: 1.1rem; line-height: 2; list-style: none; padding-right: 0;">
+                    <li>☐ קובץ HTML עם מבנה סמנטי תקין</li>
+                    <li>☐ קובץ CSS עם עיצוב Flexbox</li>
+                    <li>☐ קובץ JavaScript עם הלוגיקה</li>
+                    <li>☐ כפתור שמשנה טקסט כשלוחצים</li>
+                    <li>☐ הודעות ב-Console (F12 לבדיקה)</li>
+                    <li>☐ מערך עם שמות + לולאה שמציגה אותם</li>
+                    <li>☐ שימוש נכון ב-const ו-let</li>
+                    <li>☐ פונקציות עם שמות ברורים</li>
+                </ul>
+            </div>
+            
+            <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-right: 5px solid #ffc107; margin-top: 30px;">
+                <h4 style="color: #f57c00; margin-bottom: 15px;">💡 טיפים לביצוע:</h4>
+                <ul style="margin-right: 30px; font-size: 1.1rem; line-height: 2;">
+                    <li><strong>התחילו מ-HTML</strong> - בנו את המבנה קודם</li>
+                    <li><strong>הוסיפו CSS</strong> - עצבו את העמוד</li>
+                    <li><strong>הוסיפו JavaScript</strong> - הפעילו את האינטראקטיביות</li>
+                    <li><strong>בדקו בקונסול</strong> - לחצו F12 ותראו שהכל עובד</li>
+                    <li><strong>שאלו שאלות</strong> - אם משהו לא ברור!</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Slide 16: Practice Exercises -->

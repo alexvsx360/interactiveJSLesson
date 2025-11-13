@@ -31,6 +31,7 @@ body {
 .slide {
     display: none;
     padding: 60px;
+    padding-bottom: 180px; /* מרווח גדול בתחתית למניעת חפיפה עם כפתורי הניווט */
     height: 100%;
     overflow-y: auto;
     animation: slideIn 0.5s ease-in-out;
@@ -2204,6 +2205,7 @@ pre code .token.dom.variable {
 @media (max-width: 768px) {
     .slide {
         padding: 30px 20px;
+        padding-bottom: 200px; /* מרווח עוד יותר גדול במובייל */
     }
 
     .title-main {
