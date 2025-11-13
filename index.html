@@ -1,0 +1,2881 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript למתחילים – שיעור 2</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Prism.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <div class="slideshow-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1 class="title-main">JavaScript למתחילים</h1>
+            <h2 class="title-sub">שיעור 2</h2>
+        </div>
+
+        <!-- Slide 2: Goals -->
+        <div class="slide">
+            <h2>מה נלמד היום? 📚</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 20px;">📖 חלק א' - יסודות</h3>
+                    <ul class="goals-list" style="line-height: 2.2;">
+                        <li>✅ <strong>חזרה על שיעורי בית</strong> - HTML סמנטי</li>
+                        <li>🔤 <strong>משתנים</strong> - var, let, const (מה ההבדלים?)</li>
+                        <li>💻 <strong>מה זה JavaScript?</strong> - איך הוא עובד עם HTML ו-CSS</li>
+                        <li>📝 <strong>סוגי נתונים</strong> - String, Number, Boolean, Null, Undefined</li>
+                        <li>🔢 <strong>מספרים</strong> - למה 0.1 + 0.2 ≠ 0.3? (IEEE 754)</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 style="color: #e74c3c; margin-bottom: 20px;">🚀 חלק ב' - מתקדם</h3>
+                    <ul class="goals-list" style="line-height: 2.2;">
+                        <li>🎁 <strong>אוביקטים</strong> - איך לאחסן מידע מורכב</li>
+                        <li>🔒 <strong>Immutable vs Mutable</strong> - מה משתנה ומה לא</li>
+                        <li>🎮 <strong>אינטראקציה עם DOM</strong> - 8 סוגי אירועים</li>
+                        <li>⚙️ <strong>פונקציות</strong> - איך לכתוב קוד לשימוש חוזר</li>
+                        <li>🔐 <strong>Scope</strong> - החוק הכי חשוב! (TDZ)</li>
+                        <li>🔄 <strong>לולאות</strong> - for, while, do...while</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="note" style="margin-top: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                <h4 style="color: white; font-size: 1.5rem;">🎯 מה מיוחד בשיעור הזה?</h4>
+                <ul style="line-height: 2; font-size: 1.1rem; margin-right: 20px;">
+                    <li>✨ <strong>אנימציות אינטראקטיביות</strong> - תראו איך JavaScript עובד בזמן אמת</li>
+                    <li>🎮 <strong>תרגולים אינטראקטיביים</strong> - נסו הכל בעצמכם!</li>
+                    <li>🤔 <strong>שאלות לכיתה</strong> - בדקו את עצמכם</li>
+                    <li>💡 <strong>דוגמאות מעשיות</strong> - קוד שאפשר להשתמש בו מיד</li>
+                    <li>🔥 <strong>טריקים מתקדמים</strong> - דברים שלא מלמדים בשיעורים רגילים</li>
+                </ul>
+            </div>
+            
+            <p style="text-align: center; margin-top: 30px; font-size: 1.3rem; background: #fff3cd; padding: 20px; border-radius: 15px; border-right: 5px solid #ffc107;">
+                <strong>💪 מטרת השיעור:</strong> בסוף השיעור תדעו לבנות אתר אינטראקטיבי עם JavaScript!
+            </p>
+        </div>
+
+        <!-- Slide 3: Homework Review -->
+        <div class="slide">
+            <h2>חזרה על שיעורי הבית</h2>
+            <p><strong>המבנה שביקשנו לבנות:</strong></p>
+            <div class="code-section">
+                <pre><code>&lt;main class="container"&gt;
+  &lt;header&gt;כותרת עליונה&lt;/header&gt;
+  &lt;section class="content"&gt;
+    &lt;article&gt;תיבה שמאל&lt;/article&gt;
+    &lt;article&gt;תיבה ימין&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>תגית</th>
+                        <th>תפקיד</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>&lt;main&gt;</code></td><td>תוכן מרכזי</td></tr>
+                    <tr><td><code>&lt;header&gt;</code></td><td>כותרת עליונה</td></tr>
+                    <tr><td><code>&lt;section&gt;</code></td><td>אזור לפי נושא</td></tr>
+                    <tr><td><code>&lt;article&gt;</code></td><td>יחידת תוכן עצמאית</td></tr>
+                </tbody>
+            </table>
+            
+            <!-- Interactive HTML Visualizer -->
+            <div class="html-visualizer-container">
+                <button class="run-btn" onclick="toggleHTMLVisualizer()">הצג תצוגה חזותית של המבנה 👁️</button>
+                
+                <div class="html-visualizer" id="htmlVisualizer" style="display: none;">
+                    <div class="visualizer-split">
+                        <!-- Code Side -->
+                        <div class="visualizer-code">
+                            <h4>קוד HTML:</h4>
+                            <pre><code id="htmlCode"><span class="code-line" data-element="main">&lt;main class="container"&gt;</span>
+<span class="code-line" data-element="header">  &lt;header&gt;כותרת עליונה&lt;/header&gt;</span>
+<span class="code-line" data-element="section">  &lt;section class="content"&gt;</span>
+<span class="code-line" data-element="article1">    &lt;article&gt;תיבה שמאל&lt;/article&gt;</span>
+<span class="code-line" data-element="article2">    &lt;article&gt;תיבה ימין&lt;/article&gt;</span>
+<span class="code-line" data-element="section">  &lt;/section&gt;</span>
+<span class="code-line" data-element="main">&lt;/main&gt;</span></code></pre>
+                        </div>
+                        
+                        <!-- Visual Side -->
+                        <div class="visualizer-preview">
+                            <h4>תצוגה חזותית:</h4>
+                            <div class="element-info" id="elementInfo">עבור עם העכבר על האלמנטים</div>
+                            
+                            <div class="demo-main" data-element="main">
+                                <div class="demo-header" data-element="header">
+                                    כותרת עליונה
+                                </div>
+                                <div class="demo-section" data-element="section">
+                                    <div class="demo-article" data-element="article1">
+                                        תיבה שמאל
+                                    </div>
+                                    <div class="demo-article" data-element="article2">
+                                        תיבה ימין
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Variables -->
+        <div class="slide">
+            <h2>משתנים (Variables)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>מילה</th>
+                        <th>ניתן לשנות ערך</th>
+                        <th>תחום תקפות (Scope)</th>
+                        <th>הערות</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>var</code></td><td>✅ כן</td><td>גלובלי / פונקציונלי</td><td>לא מומלץ</td></tr>
+                    <tr><td><code>let</code></td><td>✅ כן</td><td>תחום בלוק</td><td>מומלץ לשימוש</td></tr>
+                    <tr><td><code>const</code></td><td>❌ לא</td><td>תחום בלוק</td><td>חובה לאתחל מידי</td></tr>
+                </tbody>
+            </table>
+            <div class="interactive-code">
+                <pre><code>let counter = 1;
+const PI = 3.14;
+counter++;
+console.log(counter); // 2</code></pre>
+                <button class="run-btn" onclick="runCode1()">הרץ קוד</button>
+                <div class="output" id="output1"></div>
+            </div>
+            <p class="note">💡 טיפ חשוב: <code>const</code> שומר על הכתובת במערך, אבל אפשר לשנות מה שבפנים!</p>
+            
+            <!-- Class Question -->
+            <div class="class-question-container">
+                <button class="question-btn" onclick="showQuestion('q4')">🤔 שאלה לכיתה</button>
+                <div class="class-question" id="question-q4" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה מאתגרת:</h4>
+                        <p>מה יקרה אם ננסה להריץ את הקוד הבא?</p>
+                        <pre><code>const arr1 = [1, 2, 3];
+const arr2 = [1, 2, 3];
+console.log(arr1 === arr2);
+
+const obj1 = {name: "Alex"};
+const obj2 = {name: "Alex"};
+console.log(obj1 === obj2);</code></pre>
+                        <p>א) true, true - אותם ערכים</p>
+                        <p>ב) false, false - מערכים ואובייקטים שונים</p>
+                        <p>ג) true, false - מערכים שווים, אובייקטים לא</p>
+                        <p>ד) תלוי במצב</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('q4')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-q4" style="display: none;">
+                        <h4>✅ תשובה נכונה: ב (false, false)</h4>
+                        <p><strong>הסבר המפתיע:</strong></p>
+                        <p>JavaScript משווה מערכים ואובייקטים לפי <strong>הפניה (reference)</strong> ולא לפי ערך!</p>
+                        <p>כל מערך/אובייקט נמצא במיקום שונה בזיכרון, אז הם לא שווים גם אם התוכן זהה.</p>
+                        
+                        <div class="demo-code">
+                            <pre><code>// הבעיה:
+const arr1 = [1, 2, 3];
+const arr2 = [1, 2, 3];
+console.log(arr1 === arr2);  // false 😱
+
+// אותו דבר באובייקטים:
+const obj1 = {name: "Alex"};
+const obj2 = {name: "Alex"};
+console.log(obj1 === obj2);  // false 😱
+
+// אבל אם מפנים לאותו מקום:
+const arr3 = arr1;
+console.log(arr1 === arr3);  // true ✅</code></pre>
+                        </div>
+                        
+                        <h4 style="color: #e65100; margin-top: 20px;">💡 איך כן משווים?</h4>
+                        
+                        <div class="demo-code">
+                            <pre><code>// דרך 1: JSON.stringify (פשוטה)
+const arr1 = [1, 2, 3];
+const arr2 = [1, 2, 3];
+console.log(JSON.stringify(arr1) === JSON.stringify(arr2));  // true ✅
+
+// דרך 2: לולאה (לפשוטים)
+function arraysEqual(a, b) {
+  if (a.length !== b.length) return false;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
+console.log(arraysEqual(arr1, arr2));  // true ✅
+
+// דרך 3: Object.keys (לאובייקטים פשוטים)
+function objectsEqual(obj1, obj2) {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+  
+  if (keys1.length !== keys2.length) return false;
+  
+  for (let key of keys1) {
+    if (obj1[key] !== obj2[key]) return false;
+  }
+  return true;
+}</code></pre>
+                        </div>
+                        
+                        <button class="mini-run-btn" onclick="runArrayCompareDemo()" style="margin-top: 15px;">▶ הרץ דוגמה מלאה</button>
+                        <div class="mini-output" id="outputArrayCompare"></div>
+                        
+                        <p style="margin-top: 15px;"><strong>🎯 לקח חשוב:</strong></p>
+                        <ul style="text-align: right; margin-right: 20px;">
+                            <li>מערכים ואובייקטים משווים לפי הפניה, לא ערך</li>
+                            <li>JSON.stringify הכי פשוט למערכים ואובייקטים פשוטים</li>
+                            <li>לפעמים צריך לכתוב פונקציית השוואה מותאמת אישית</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Console.log -->
+        <div class="slide">
+            <h2>Console - החבר הכי טוב שלך בתכנות! 🔍</h2>
+            
+            <h3>📝 console.log() - מתחילים פה</h3>
+            <p>הדרך הכי פשוטה להדפיס דברים ולראות מה קורה בקוד</p>
+            <div class="interactive-code">
+                <pre><code>console.log("Hello JavaScript!");
+let name = "Alex";
+console.log("Welcome,", name);
+console.log("מספר:", 42, "בוליאני:", true);</code></pre>
+                <button class="run-btn" onclick="runCode2()">הרץ קוד</button>
+                <div class="output" id="output2"></div>
+            </div>
+            
+            <h3>🎨 console.log() צבעוני!</h3>
+            <p>רוצים לעשות קצת כיף? אפשר לצבוע את ההדפסות בקונסול!</p>
+            <div class="interactive-code">
+                <pre><code>console.log('%cטקסט מעוצב!', 'color: blue; font-size: 20px; font-weight: bold;');
+console.log('%cשגיאה חמורה!', 'color: red; background: yellow; padding: 5px;');
+console.log('%c✨ הצלחה! ✨', 'color: green; font-size: 24px; text-shadow: 2px 2px 4px #000;');
+
+// כמה צבעים באותה שורה
+console.log('%cכחול %cאדום %cירוק', 
+    'color: blue;', 
+    'color: red;', 
+    'color: green;');</code></pre>
+                <button class="run-btn" onclick="runConsoleStyled()">הרץ קוד מעוצב</button>
+                <div class="output" id="outputStyled"></div>
+            </div>
+            
+            <h3>📊 console.table() - טבלאות מסודרות</h3>
+            <p>כשיש לכם הרבה מידע, console.table הופך אותו לטבלה נוחה לקריאה</p>
+            <div class="interactive-code">
+                <pre><code>// מערך פשוט
+const fruits = ["תפוח", "בננה", "תפוז"];
+console.table(fruits);
+
+// מערך של אובייקטים
+const students = [
+    { name: "אלכס", age: 20, grade: 95 },
+    { name: "שרה", age: 22, grade: 88 },
+    { name: "דני", age: 21, grade: 92 }
+];
+console.table(students);
+
+// עם עמודות ספציפיות
+console.table(students, ["name", "grade"]);</code></pre>
+                <button class="run-btn" onclick="runConsoleTable()">הרץ טבלה</button>
+                <div class="output" id="outputTable"></div>
+            </div>
+            
+            <h3>⚠️ console.warn() - אזהרות</h3>
+            <p>כשרוצים להתריע על משהו חשוד אבל לא קריטי - צהוב זה בדיוק מה שצריך!</p>
+            <div class="interactive-code">
+                <pre><code>console.warn("זוהי אזהרה!");
+console.warn("⚠️ המשתנה עלול להיות undefined");
+console.warn("גרסה ישנה - מומלץ לעדכן!");</code></pre>
+                <button class="run-btn" onclick="runConsoleWarn()">הרץ אזהרות</button>
+                <div class="output" id="outputWarn"></div>
+            </div>
+            
+            <h3>❌ console.error() - שגיאות</h3>
+            <p>כשמשהו השתבש ורוצים לדעת על זה בגדול - אדום זה הצבע!</p>
+            <div class="interactive-code">
+                <pre><code>console.error("זוהי שגיאה!");
+console.error("❌ פעולה נכשלה!");
+console.error("שגיאת חיבור למסד נתונים");
+
+// שגיאה עם אובייקט
+console.error("שגיאה:", { code: 404, message: "לא נמצא" });</code></pre>
+                <button class="run-btn" onclick="runConsoleError()">הרץ שגיאות</button>
+                <div class="output" id="outputError"></div>
+            </div>
+            
+            <h3>🎯 עוד כלים שימושיים</h3>
+            <div class="console-bonus">
+                <div class="bonus-item">
+                    <strong>console.clear()</strong> - מנקה את כל הקונסול (כמו מחק הכל)
+                </div>
+                <div class="bonus-item">
+                    <strong>console.time() / timeEnd()</strong> - מודד כמה זמן הקוד רץ
+                </div>
+                <div class="bonus-item">
+                    <strong>console.group()</strong> - מסדר הודעות בקבוצות
+                </div>
+                <div class="bonus-item">
+                    <strong>console.count()</strong> - סופר כמה פעמים עברנו על שורה
+                </div>
+            </div>
+            
+            <div class="interactive-code">
+                <pre><code>// דוגמה למדידת זמן
+console.time("חישוב");
+let sum = 0;
+for (let i = 0; i < 1000000; i++) {
+    sum += i;
+}
+console.timeEnd("חישוב");
+
+// דוגמה לקאונטר
+for (let i = 0; i < 5; i++) {
+    console.count("לולאה");
+}</code></pre>
+                <button class="run-btn" onclick="runConsoleBonus()">הרץ בונוס</button>
+                <div class="output" id="outputBonus"></div>
+            </div>
+            
+            <div class="summary-box">
+                <h4>📌 סיכום אינטראקטיבי:</h4>
+                <p class="summary-instruction">👆 לחץ על כל שורה כדי להריץ דוגמה בקונסול</p>
+                <ul>
+                    <li class="clickable-summary" onclick="runQuickConsoleLog()">
+                        <code>console.log()</code> - הדפסה רגילה
+                        <span class="click-indicator">▶</span>
+                    </li>
+                    <li class="clickable-summary" onclick="runQuickConsoleStyled()">
+                        <code>console.log('%c...', 'css')</code> - הדפסה מעוצבת
+                        <span class="click-indicator">▶</span>
+                    </li>
+                    <li class="clickable-summary" onclick="runQuickConsoleTable()">
+                        <code>console.table()</code> - הצגת טבלאות
+                        <span class="click-indicator">▶</span>
+                    </li>
+                    <li class="clickable-summary" onclick="runQuickConsoleWarn()">
+                        <code>console.warn()</code> - אזהרות (צהוב)
+                        <span class="click-indicator">▶</span>
+                    </li>
+                    <li class="clickable-summary" onclick="runQuickConsoleError()">
+                        <code>console.error()</code> - שגיאות (אדום)
+                        <span class="click-indicator">▶</span>
+                    </li>
+                </ul>
+                <p class="tip">💡 <strong>טיפ חשוב:</strong> תלחץ F12 בדפדפן כדי לפתוח את הקונסול ולראות את הקסם!</p>
+                <div class="quick-output" id="quickConsoleFeedback"></div>
+            </div>
+        </div>
+
+        <!-- Slide 6: What is JavaScript -->
+        <div class="slide">
+            <h2>מה זה JavaScript?</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>שכבה</th>
+                        <th>תפקיד</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>HTML</td><td>מבנה ותוכן</td></tr>
+                    <tr><td>CSS</td><td>עיצוב וסגנון</td></tr>
+                    <tr><td>JavaScript</td><td>אינטראקציה והתנהגות</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>🎬 בואו נראה את זה בחיים!</h3>
+            <p class="instruction-text">👇 לחצו על הכפתור ותראו איך שלושת השכבות עובדות ביחד</p>
+            
+            <div class="js-animation-container">
+                <button class="run-btn" onclick="startJSAnimation()">🎬 הצג אנימציה</button>
+                
+                <div class="animation-stage" id="animationStage" style="display: none;">
+                    <!-- HTML Block -->
+                    <div class="tech-block html-block" id="htmlBlock">
+                        <div class="block-header">HTML</div>
+                        <div class="block-content">
+                            <code>&lt;h1&gt;&lt;/h1&gt;</code>
+                            <code>&lt;p&gt;&lt;/p&gt;</code>
+                        </div>
+                        <div class="block-label">מבנה ותוכן</div>
+                    </div>
+                    
+                    <!-- CSS Block -->
+                    <div class="tech-block css-block" id="cssBlock">
+                        <div class="block-header">CSS</div>
+                        <div class="block-content">
+                            <code>color: blue;</code>
+                            <code>font-size: 2em;</code>
+                        </div>
+                        <div class="block-label">עיצוב וסגנון</div>
+                    </div>
+                    
+                    <!-- JavaScript Block -->
+                    <div class="tech-block js-block" id="jsBlock"> 
+                        <div class="block-header">JavaScript</div>
+                        <div class="block-content">
+                            <code>onclick</code>
+                            <code>function()</code>
+                        </div>
+                        <div class="block-label">אינטראקציה</div>
+                    </div>
+                    
+                    <!-- Connection Lines -->
+                    <svg class="connection-lines" id="connectionLines">
+                        <line id="line1" x1="50%" y1="30%" x2="50%" y2="50%" stroke="#f39c12" stroke-width="3" stroke-dasharray="5,5" opacity="0"/>
+                        <line id="line2" x1="50%" y1="30%" x2="50%" y2="50%" stroke="#3498db" stroke-width="3" stroke-dasharray="5,5" opacity="0"/>
+                    </svg>
+                    
+                    <!-- Result -->
+                    <div class="result-box" id="resultBox">
+                        <div class="result-icon">✨</div>
+                        <h4 id="resultTitle">שלום עולם!</h4>
+                        <button class="result-btn" id="resultBtn">לחץ עליי</button>
+                        <div class="result-label">תוצאה סופית! 🎉</div>
+                    </div>
+                </div>
+                
+                <div class="animation-explanation" id="animationExplanation" style="display: none;">
+                    <h4>💡 מה קרה באנימציה?</h4>
+                    <ol style="line-height: 2; font-size: 1.1rem;">
+                        <li><strong>HTML</strong> (אדום) הופיע משמאל - זה המבנה</li>
+                        <li><strong>CSS</strong> (כחול) הופיע מימין - זה העיצוב</li>
+                        <li><strong>JavaScript</strong> (כתום) נחת מלמעלה באמצע - זה המחבר! 🧠</li>
+                        <li>JS זהר - מתכונן לפעולה ⚡</li>
+                        <li>ידיים יצאו מ-JS 👈👉</li>
+                        <li>יד ימין תפסה את <strong>CSS</strong> ומשכה אותו ל-JS - חיבור ראשון! ✨</li>
+                        <li>JS+CSS זוהרים ביחד - הם מחוברים!</li>
+                        <li>יד שמאל תפסה את <strong>HTML</strong> ומשכה אותו אליהם 🤝</li>
+                        <li>כולם ביחד - מסתובבים וזוהרים! 🔄</li>
+                        <li>💥 פיצוץ קסם!</li>
+                        <li>תוצאה: דף אינטראקטיבי שעובד! 🎉</li>
+                    </ol>
+                    <p style="text-align: center; margin-top: 20px; font-size: 1.2rem; color: #2e7d32; background: #e8f5e9; padding: 15px; border-radius: 10px;">
+                        <strong>🎯 הלקח: JavaScript תופס את CSS קודם, ואז את HTML, ומחבר הכל לדף חי!</strong>
+                    </p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">🎯 דוגמה אמיתית:</h3>
+            <div class="interactive-demo">
+                <h3 id="demoTitle">שלום עולם!</h3>
+                <button class="demo-btn" onclick="changeTitle()">לחץ עליי</button>
+            </div>
+            
+            <div class="code-section" style="margin-top: 20px;">
+                <pre><code>// JavaScript תופס את האלמנטים:
+document.getElementById("btn").onclick = function() {
+  document.getElementById("msg").innerText = "ברוך הבא לעולם JavaScript!";
+  alert("קוד הופעל!");
+};</code></pre>
+            </div>
+            
+            <h3 style="margin-top: 40px;">📝 תרגול לכיתה - בחרו 2 מתוך 6</h3>
+            <div class="exercise-box">
+                <p><strong>משימה:</strong> בחרו 2 מהרעיונות הבאים וצרו דוגמה פשוטה עם HTML + CSS + JS</p>
+                
+                <div style="background: #f0f4ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #1976d2; margin-bottom: 15px;">💡 6 רעיונות לבחירה:</h4>
+                    <ol style="line-height: 2; font-size: 1.1rem; margin-right: 30px;">
+                        <li><strong>כפתור משנה צבע רקע</strong> - לחצן שמשנה את צבע הדף בכל לחיצה</li>
+                        <li><strong>מונה לחיצות</strong> - כפתור שמונה כמה פעמים לחצתם</li>
+                        <li><strong>הודעת ברכה</strong> - שדה טקסט + כפתור שמציג "שלום [שם]"</li>
+                        <li><strong>הצג/הסתר תמונה</strong> - כפתור שמראה או מסתיר תמונה</li>
+                        <li><strong>חשבון פשוט</strong> - שני מספרים וכפתור שמחשב את הסכום</li>
+                        <li><strong>שינוי גודל טקסט</strong> - כפתורים להגדלה/הקטנה של טקסט</li>
+                    </ol>
+                </div>
+                
+                <h4 style="color: #2e7d32; margin-top: 20px;">✨ דוגמה 1: כפתור משנה צבע</h4>
+                <div class="code-section">
+                    <pre><code>&lt;!-- HTML --&gt;
+&lt;button id="colorBtn"&gt;שנה צבע&lt;/button&gt;
+
+&lt;!-- CSS --&gt;
+&lt;style&gt;
+  #colorBtn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+  }
+&lt;/style&gt;
+
+&lt;!-- JavaScript --&gt;
+&lt;script&gt;
+  document.getElementById("colorBtn").onclick = function() {
+    document.body.style.background = "#" + Math.random().toString(16).slice(2,8);
+  };
+&lt;/script&gt;</code></pre>
+                </div>
+                <button class="run-btn" onclick="openDemoPopup(1)">▶ הרץ דוגמה 1 (פופאפ)</button>
+                
+                <h4 style="color: #2e7d32; margin-top: 30px;">✨ דוגמה 2: מונה לחיצות</h4>
+                <div class="code-section">
+                    <pre><code>&lt;!-- HTML --&gt;
+&lt;button id="countBtn"&gt;לחץ עליי!&lt;/button&gt;
+&lt;p id="counter"&gt;לחיצות: 0&lt;/p&gt;
+
+&lt;!-- CSS --&gt;
+&lt;style&gt;
+  #counter {
+    font-size: 1.5rem;
+    color: #e74c3c;
+    font-weight: bold;
+  }
+&lt;/style&gt;
+
+&lt;!-- JavaScript --&gt;
+&lt;script&gt;
+  let count = 0;
+  document.getElementById("countBtn").onclick = function() {
+    count++;
+    document.getElementById("counter").innerText = "לחיצות: " + count;
+  };
+&lt;/script&gt;</code></pre>
+                </div>
+                <button class="run-btn" onclick="openDemoPopup(2)">▶ הרץ דוגמה 2 (פופאפ)</button>
+                
+                <p style="margin-top: 30px; background: #fff3cd; padding: 15px; border-radius: 10px; border-right: 4px solid #ffc107;">
+                    <strong>💡 טיפ:</strong> תתחילו עם HTML פשוט, תוסיפו CSS לעיצוב, ובסוף תוסיפו את ה-JavaScript לאינטראקציה!
+                </p>
+            </div>
+        </div>
+        
+        <!-- Demo Popups -->
+        <div class="demo-popup" id="demoPopup1">
+            <div class="demo-popup-content">
+                <button class="demo-popup-close" onclick="closeDemoPopup(1)">✖</button>
+                <h3>✨ דוגמה 1: כפתור משנה צבע</h3>
+                <p>לחצו על הכפתור כדי לשנות את צבע הרקע!</p>
+                <div class="demo-popup-demo">
+                    <button onclick="changeBackgroundColor()">שנה צבע רקע</button>
+                    <p id="colorDisplay1"></p>
+                </div>
+                <div class="code-section" style="margin-top: 20px;">
+                    <pre><code>document.getElementById("colorBtn").onclick = function() {
+  const randomColor = "#" + Math.random().toString(16).slice(2,8);
+  document.body.style.background = randomColor;
+};</code></pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-popup" id="demoPopup2">
+            <div class="demo-popup-content">
+                <button class="demo-popup-close" onclick="closeDemoPopup(2)">✖</button>
+                <h3>✨ דוגמה 2: מונה לחיצות</h3>
+                <p>לחצו על הכפתור וראו את המונה עולה!</p>
+                <div class="demo-popup-demo">
+                    <button onclick="incrementCounter()">לחץ עליי!</button>
+                    <p id="counterDisplay">לחיצות: 0</p>
+                </div>
+                <div class="code-section" style="margin-top: 20px;">
+                    <pre><code>let count = 0;
+document.getElementById("countBtn").onclick = function() {
+  count++;
+  document.getElementById("counter").innerText = "לחיצות: " + count;
+};</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Data Types -->
+        <div class="slide">
+            <h2>סוגי נתונים (Data Types)</h2>
+            <p class="instruction-text">👆 לחצו על כל אחד כדי לראות דוגמאות מגניבות!</p>
+            <div class="data-types-visual">
+                <span class="type-badge clickable" onclick="showDataType('string')">String</span>
+                <span class="type-badge clickable" onclick="showDataType('number')">Number</span>
+                <span class="type-badge clickable" onclick="showDataType('boolean')">Boolean</span>
+                <span class="type-badge clickable" onclick="showDataType('null')">Null</span>
+                <span class="type-badge clickable" onclick="showDataType('undefined')">Undefined</span>
+            </div>
+            
+            <!-- Data Type Details -->
+            <div class="data-type-details" id="dataTypeDetails" style="display: none;">
+                <!-- String Details -->
+                <div class="type-content" id="type-string" style="display: none;">
+                    <h3>📝 String (מחרוזת - זה בעצם טקסט!)</h3>
+                    <p><strong>מה זה?</strong> כל טקסט שתשימו בתוך מרכאות: '' או "" או ``</p>
+                    
+                    <h4>🎯 דוגמאות בסיסיות:</h4>
+                    <div class="demo-code">
+                        <pre><code>let name = "Alex";
+let greeting = 'שלום עולם!';
+let emoji = "🎉😊";
+let empty = "";  // מחרוזת ריקה</code></pre>
+                    </div>
+                    
+                    <h4>🔥 דברים מעניינים:</h4>
+                    <div class="interesting-facts">
+                        <div class="fact-item">
+                            <strong>1. Template Literals (``)</strong>
+                            <pre><code>let name = "דני";
+let age = 25;
+let message = `שלום ${name}, אתה בן ${age}`;
+console.log(message);  // "שלום דני, אתה בן 25"</code></pre>
+                            <button class="mini-run-btn" onclick="runStringFact1()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputStringFact1"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>2. מתודות שימושיות:</strong>
+                            <pre><code>let text = "JavaScript";
+text.length;           // 10
+text.toUpperCase();    // "JAVASCRIPT"
+text.toLowerCase();    // "javascript"
+text.slice(0, 4);     // "Java"
+text.includes("Script"); // true
+text.split("a");      // ["J", "v", "Script"]</code></pre>
+                            <button class="mini-run-btn" onclick="runStringFact2()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputStringFact2"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>3. Escape Characters:</strong>
+                            <pre><code>let quote = "He said \"Hello!\"";  // מרכאות בתוך מחרוזת
+let newLine = "שורה 1\nשורה 2";     // מעבר שורה
+let tab = "א\tב";                   // טאב</code></pre>
+                            <button class="mini-run-btn" onclick="runStringFact3()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputStringFact3"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="run-btn" onclick="runStringDemo()">הרץ דוגמאות String</button>
+                    <div class="output" id="outputString"></div>
+                </div>
+                
+                <!-- Number Details -->
+                <div class="type-content" id="type-number" style="display: none;">
+                    <h3>🔢 Number (מספרים!)</h3>
+                    <p><strong>מה זה?</strong> כל מספר שאתם יכולים לחשוב עליו - שלם, עשרוני, חיובי, שלילי - הכל!</p>
+                    
+                    <h4>🎯 דוגמאות בסיסיות:</h4>
+                    <div class="demo-code">
+                        <pre><code>let age = 25;          // מספר שלם
+let price = 99.99;     // עשרוני
+let negative = -10;    // שלילי
+let big = 1e6;         // 1,000,000 (מיליון)
+let tiny = 1e-6;       // 0.000001</code></pre>
+                    </div>
+                    
+                    <h4>🔥 דברים מעניינים:</h4>
+                    <div class="interesting-facts">
+                        <div class="fact-item">
+                            <strong>1. מספרים מיוחדים:</strong>
+                            <pre><code>console.log(Infinity);      // אינסוף
+console.log(-Infinity);     // אינסוף שלילי
+console.log(NaN);           // Not a Number
+console.log(1 / 0);         // Infinity
+console.log("a" * 5);       // NaN</code></pre>
+                            <button class="mini-run-btn" onclick="runNumberFact1()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputNumberFact1"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>2. Math אובייקט:</strong>
+                            <pre><code>Math.PI;              // 3.14159...
+Math.round(4.7);      // 5
+Math.floor(4.7);      // 4
+Math.ceil(4.3);       // 5
+Math.random();        // מספר אקראי 0-1
+Math.max(1, 5, 3);    // 5
+Math.min(1, 5, 3);    // 1
+Math.pow(2, 3);       // 8 (2³)</code></pre>
+                            <button class="mini-run-btn" onclick="runNumberFact2()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputNumberFact2"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>3. המרות:</strong>
+                            <pre><code>parseInt("123");      // 123
+parseFloat("3.14");   // 3.14
+Number("456");        // 456
+(42).toString();      // "42"
+(3.14159).toFixed(2); // "3.14"</code></pre>
+                            <button class="mini-run-btn" onclick="runNumberFact3()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputNumberFact3"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="run-btn" onclick="runNumberDemo()">הרץ דוגמאות Number</button>
+                    <div class="output" id="outputNumber"></div>
+                </div>
+                
+                <!-- Boolean Details -->
+                <div class="type-content" id="type-boolean" style="display: none;">
+                    <h3>✅❌ Boolean (נכון או לא נכון)</h3>
+                    <p><strong>מה זה?</strong> הכי פשוט שיש - רק שני אפשרויות: true (נכון) או false (לא נכון)</p>
+                    
+                    <h4>🎯 דוגמאות בסיסיות:</h4>
+                    <div class="demo-code">
+                        <pre><code>let isStudent = true;
+let isOld = false;
+let hasLicense = true;</code></pre>
+                    </div>
+                    
+                    <h4>🔥 דברים מעניינים:</h4>
+                    <div class="interesting-facts">
+                        <div class="fact-item">
+                            <strong>1. השוואות:</strong>
+                            <pre><code>5 > 3;            // true
+10 === 10;        // true
+"a" === "b";      // false
+5 !== 3;          // true
+10 >= 10;         // true</code></pre>
+                            <button class="mini-run-btn" onclick="runBooleanFact1()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputBooleanFact1"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>2. אופרטורים לוגיים:</strong>
+                            <pre><code>true && true;     // true (וגם)
+true || false;    // true (או)
+!true;            // false (לא)
+!false;           // true
+
+let age = 20;
+age >= 18 && age <= 65;  // true</code></pre>
+                            <button class="mini-run-btn" onclick="runBooleanFact2()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputBooleanFact2"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>3. Truthy & Falsy:</strong>
+                            <pre><code>// Falsy values (נחשבים ל-false):
+Boolean(0);          // false
+Boolean("");         // false
+Boolean(null);       // false
+Boolean(undefined);  // false
+Boolean(NaN);        // false
+
+// Truthy values (נחשבים ל-true):
+Boolean(1);          // true
+Boolean("hello");    // true
+Boolean([]);         // true
+Boolean({});         // true</code></pre>
+                            <button class="mini-run-btn" onclick="runBooleanFact3()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputBooleanFact3"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="run-btn" onclick="runBooleanDemo()">הרץ דוגמאות Boolean</button>
+                    <div class="output" id="outputBoolean"></div>
+                </div>
+                
+                <!-- Null Details -->
+                <div class="type-content" id="type-null" style="display: none;">
+                    <h3>⭕ Null (ריק במכוון)</h3>
+                    <p><strong>מה זה?</strong> כשאנחנו אומרים במפורש: "אין פה כלום!" - זה null</p>
+                    
+                    <h4>🎯 דוגמאות בסיסיות:</h4>
+                    <div class="demo-code">
+                        <pre><code>let user = null;        // אין משתמש
+let data = null;        // אין מידע
+let response = null;    // אין תשובה</code></pre>
+                    </div>
+                    
+                    <h4>🔥 דברים מעניינים:</h4>
+                    <div class="interesting-facts">
+                        <div class="fact-item">
+                            <strong>1. מתי להשתמש ב-null?</strong>
+                            <pre><code>// כשרוצים לאתחל משתנה כ"ריק"
+let selectedUser = null;
+
+// כשרוצים למחוק ערך
+let data = {name: "Alex"};
+data = null;  // מוחק את האובייקט
+
+// כשמחזירים "אין תוצאה"
+function findUser(id) {
+  if (!found) return null;
+}</code></pre>
+                            <button class="mini-run-btn" onclick="runNullFact1()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputNullFact1"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>2. הבאג המפורסם:</strong>
+                            <pre><code>typeof null;  // "object" 😱
+// זה באג היסטורי ב-JavaScript!
+
+// הדרך הנכונה לבדוק null:
+let x = null;
+x === null;        // true ✅
+x == undefined;    // true (!!!)
+x === undefined;   // false</code></pre>
+                            <button class="mini-run-btn" onclick="runNullFact2()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputNullFact2"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>3. null vs undefined:</strong>
+                            <pre><code>let a = null;       // הוגדר כריק
+let b;              // לא הוגדר
+
+console.log(a);     // null
+console.log(b);     // undefined
+
+// null = "אמרתי שזה ריק"
+// undefined = "שכחתי להגדיר"</code></pre>
+                            <button class="mini-run-btn" onclick="runNullFact3()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputNullFact3"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="run-btn" onclick="runNullDemo()">הרץ דוגמאות Null</button>
+                    <div class="output" id="outputNull"></div>
+                </div>
+                
+                <!-- Undefined Details -->
+                <div class="type-content" id="type-undefined" style="display: none;">
+                    <h3>❓ Undefined (שכחנו להגדיר)</h3>
+                    <p><strong>מה זה?</strong> כשיצרתם משתנה אבל שכחתם לשים בו משהו - זה undefined</p>
+                    
+                    <h4>🎯 דוגמאות בסיסיות:</h4>
+                    <div class="demo-code">
+                        <pre><code>let name;           // undefined
+let age;            // undefined
+let address;        // undefined
+
+console.log(name);  // undefined</code></pre>
+                    </div>
+                    
+                    <h4>🔥 דברים מעניינים:</h4>
+                    <div class="interesting-facts">
+                        <div class="fact-item">
+                            <strong>1. מתי מקבלים undefined?</strong>
+                            <pre><code>// משתנה לא מאותחל
+let x;
+console.log(x);  // undefined
+
+// פרמטר חסר
+function greet(name) {
+  console.log(name);
+}
+greet();  // undefined
+
+// פרופרטי שלא קיים
+let obj = {a: 1};
+console.log(obj.b);  // undefined
+
+// פונקציה בלי return
+function test() {}
+console.log(test());  // undefined</code></pre>
+                            <button class="mini-run-btn" onclick="runUndefinedFact1()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputUndefinedFact1"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>2. בדיקת undefined:</strong>
+                            <pre><code>let x;
+
+x === undefined;        // true ✅
+typeof x === "undefined"; // true ✅
+
+// ⚠️ היזהר:
+x == null;  // true (!!!)</code></pre>
+                            <button class="mini-run-btn" onclick="runUndefinedFact2()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputUndefinedFact2"></div>
+                        </div>
+                        
+                        <div class="fact-item">
+                            <strong>3. טיפים:</strong>
+                            <pre><code>// ערכי ברירת מחדל
+function greet(name = "אורח") {
+  console.log("שלום " + name);
+}
+greet();  // "שלום אורח"
+
+// Optional Chaining
+let user = {};
+console.log(user?.address?.city);  // undefined
+// במקום: user.address.city (שגיאה!)
+
+// Nullish Coalescing
+let x;
+let result = x ?? "ברירת מחדל";
+console.log(result);  // "ברירת מחדל"</code></pre>
+                            <button class="mini-run-btn" onclick="runUndefinedFact3()">▶ הרץ דוגמה</button>
+                            <div class="mini-output" id="outputUndefinedFact3"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="run-btn" onclick="runUndefinedDemo()">הרץ דוגמאות Undefined</button>
+                    <div class="output" id="outputUndefined"></div>
+                </div>
+            </div>
+            
+            <div class="basic-example">
+                <h4>סיכום בסיסי:</h4>
+                <div class="interactive-code">
+                    <pre><code>let name = "Alex";       // String (מחרוזת)
+let age = 30;            // Number (מספר)
+let isStudent = true;    // Boolean (בוליאני)
+let user = null;         // Null (ערך ריק)
+let address;             // Undefined (לא הוגדר)
+
+console.log(typeof name, typeof age, typeof isStudent);</code></pre>
+                    <button class="run-btn" onclick="runCode3()">הרץ קוד</button>
+                    <div class="output" id="output3"></div>
+                </div>
+            </div>
+            
+            <!-- Class Question -->
+            <div class="class-question-container">
+                <button class="question-btn" onclick="showQuestion('q7')">🤔 שאלה לכיתה</button>
+                <div class="class-question" id="question-q7" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה מפתיעה:</h4>
+                        <p>מה יחזיר הקוד הבא?</p>
+                        <pre><code>console.log(typeof null);</code></pre>
+                        <p>א) "null"</p>
+                        <p>ב) "undefined"</p>
+                        <p>ג) "object"</p>
+                        <p>ד) שגיאה</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('q7')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-q7" style="display: none;">
+                        <h4>✅ תשובה נכונה: ג</h4>
+                        <p><strong>הסבר:</strong></p>
+                        <p>זהו אחד הבאגים המפורסמים ביותר ב-JavaScript! 🐛</p>
+                        <p><code>typeof null</code> מחזיר <code>"object"</code> למרות ש-null הוא ערך פרימיטיבי.</p>
+                        <div class="demo-code">
+                            <pre><code>console.log(typeof null);       // "object" 😱
+console.log(typeof undefined);  // "undefined" ✅
+console.log(null === undefined); // false
+console.log(null == undefined);  // true (!!!)</code></pre>
+                        </div>
+                        <p><strong>למה זה קורה?</strong></p>
+                        <p>זהו באג מהגרסאות הראשונות של JavaScript שנשמר לתמיד מסיבות של תאימות לאחור (backward compatibility).</p>
+                        <p>💡 <strong>טיפ:</strong> תמיד בדקו null באופן ישיר: <code>if (x === null)</code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Numbers -->
+        <div class="slide">
+            <h2>מספרים - יש כאן כמה הפתעות! 🔢</h2>
+            <ul>
+                <li>ב-JavaScript יש רק סוג אחד של מספר (לא כמו שפות אחרות)</li>
+                <li>מדויק עד <strong>15 ספרות</strong> - אחרי זה זה מתחיל להשתגע</li>
+                <li>המספר הכי גדול שבטוח לעבוד איתו: <code>Number.MAX_SAFE_INTEGER</code></li>
+                <li>⚠️ מספרים גדולים מדי? הם יתעגלו ותקבלו תוצאות מוזרות!</li>
+            </ul>
+            
+            <h3>למה 0.1 + 0.2 לא שווה 0.3?</h3>
+            <div class="interactive-code">
+                <pre><code>let x = 0.1 + 0.2;
+console.log("0.1 + 0.2 =", x);
+
+let y = (0.1 * 10 + 0.2 * 10) / 10;
+console.log("תיקון:", y);</code></pre>
+                <button class="run-btn" onclick="runCode4()">הרץ קוד</button>
+                <div class="output" id="output4"></div>
+            </div>
+            
+            <h3>מספרים גדולים מדי? בעיה!</h3>
+            <div class="interactive-code">
+                <pre><code>console.log("MAX_SAFE_INTEGER:", Number.MAX_SAFE_INTEGER);
+
+// בעיה: מעבר למספר הבטוח
+let big1 = Number.MAX_SAFE_INTEGER + 1;
+let big2 = Number.MAX_SAFE_INTEGER + 2;
+
+console.log("big1:", big1);
+console.log("big2:", big2);
+console.log("האם big1 === big2?", big1 === big2);  // true!! 😱</code></pre>
+                <button class="run-btn" onclick="runCode4b()">הרץ קוד</button>
+                <div class="output" id="output4b"></div>
+            </div>
+            
+            <!-- Class Question -->
+            <div class="class-question-container">
+                <button class="question-btn" onclick="showQuestion('q8')">🤔 שאלה לכיתה</button>
+                <div class="class-question" id="question-q8" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה:</h4>
+                        <p>מה יקרה אם ננסה לחשב: 9007199254740992 + 1?</p>
+                        <p>א) 9007199254740993</p>
+                        <p>ב) 9007199254740992</p>
+                        <p>ג) שגיאה</p>
+                        <p>ד) Infinity</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('q8')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-q8" style="display: none;">
+                        <h4>✅ תשובה נכונה: ב</h4>
+                        <p><strong>הסבר:</strong></p>
+                        <p>המספר 9007199254740992 הוא בדיוק Number.MAX_SAFE_INTEGER + 1.</p>
+                        <p>כשנוסיף עוד 1, JavaScript לא יכול לייצג את המספר בצורה מדויקת, ולכן התוצאה נשארת 9007199254740992!</p>
+                        <div class="demo-code">
+                            <pre><code>console.log(9007199254740992 + 1);  // 9007199254740992
+console.log(9007199254740992 + 1 === 9007199254740992);  // true!</code></pre>
+                        </div>
+                        <p>💡 <strong>לקח:</strong> אל תשתמשו במספרים גדולים מ-MAX_SAFE_INTEGER לחישובים מדויקים!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Objects (אוביקטים) -->
+        <div class="slide">
+            <h2>🎁 אוביקטים (Objects) - כלי הכי חשוב ב-JavaScript!</h2>
+            
+            <h3>מה זה אוביקט?</h3>
+            <p style="font-size: 1.2rem; line-height: 1.8;">
+                אוביקט הוא <strong>קופסה שמכילה מידע</strong> - כמו כרטיס ביקור של אדם, פרטי מוצר בחנות, או הגדרות של משחק.
+            </p>
+            <p>במקום להגדיר המון משתנים נפרדים, אוביקט מאחד הכל למקום אחד!</p>
+            
+            <div class="code-section">
+                <pre><code>// ❌ בלי אוביקט - מבולגן
+let studentName = "דני";
+let studentAge = 22;
+let studentGrade = 95;
+
+// ✅ עם אוביקט - מסודר!
+let student = {
+  name: "דני",
+  age: 22,
+  grade: 95
+};</code></pre>
+            </div>
+            
+            <h3 style="margin-top: 30px;">📚 דוגמאות לשימוש באוביקטים:</h3>
+            
+            <div class="interactive-code">
+                <h4>1. יצירת אוביקט:</h4>
+                <pre><code>let person = {
+  name: "שרה",
+  age: 25,
+  city: "תל אביב",
+  isStudent: true
+};
+
+console.log(person.name);  // "שרה"
+console.log(person.age);   // 25</code></pre>
+                <button class="run-btn" onclick="runObject1()">▶ הרץ דוגמה</button>
+                <div class="output" id="outputObject1"></div>
+            </div>
+            
+            <div class="interactive-code">
+                <h4>2. שינוי והוספה:</h4>
+                <pre><code>let car = {
+  brand: "טויוטה",
+  year: 2020
+};
+
+// שינוי ערך
+car.year = 2021;
+
+// הוספת מאפיין חדש
+car.color = "כחול";
+
+console.log(car);</code></pre>
+                <button class="run-btn" onclick="runObject2()">▶ הרץ דוגמה</button>
+                <div class="output" id="outputObject2"></div>
+            </div>
+            
+            <div class="interactive-code">
+                <h4>3. אוביקט עם פונקציה (method):</h4>
+                <pre><code>let calculator = {
+  num1: 10,
+  num2: 5,
+  add: function() {
+    return this.num1 + this.num2;
+  },
+  multiply: function() {
+    return this.num1 * this.num2;
+  }
+};
+
+console.log("חיבור:", calculator.add());        // 15
+console.log("כפל:", calculator.multiply());     // 50</code></pre>
+                <button class="run-btn" onclick="runObject3()">▶ הרץ דוגמה</button>
+                <div class="output" id="outputObject3"></div>
+            </div>
+            
+            <div class="interactive-code">
+                <h4>4. אוביקטים מקוננים:</h4>
+                <pre><code>let school = {
+  name: "בית ספר מצוינות",
+  address: {
+    city: "חיפה",
+    street: "הרצל 15"
+  },
+  students: 500
+};
+
+console.log(school.name);
+console.log(school.address.city);    // "חיפה"
+console.log(school.address.street);  // "הרצל 15"</code></pre>
+                <button class="run-btn" onclick="runObject4()">▶ הרץ דוגמה</button>
+                <div class="output" id="outputObject4"></div>
+            </div>
+            
+            <!-- Class Question: JS Object vs JSON -->
+            <div class="class-question-container" style="margin-top: 40px;">
+                <button class="question-btn" onclick="showQuestion('q9')">🤔 שאלה לכיתה</button>
+                <div class="class-question" id="question-q9" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה: מה ההבדל בין אוביקט JavaScript ל-JSON?</h4>
+                        <p>רבים מבלבלים בין השניים - אבל יש הבדלים חשובים!</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('q9')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-q9" style="display: none;">
+                        <h4>✅ ההבדלים העיקריים:</h4>
+                        
+                        <table class="data-table" style="margin: 20px 0;">
+                            <thead>
+                                <tr>
+                                    <th>JavaScript Object</th>
+                                    <th>JSON</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>אוביקט חי בזיכרון</td>
+                                    <td>טקסט (string) בפורמט מסוים</td>
+                                </tr>
+                                <tr>
+                                    <td>מפתחות ללא מרכאות</td>
+                                    <td>מפתחות עם מרכאות כפולות</td>
+                                </tr>
+                                <tr>
+                                    <td>יכול להכיל פונקציות</td>
+                                    <td>רק נתונים (ללא פונקציות)</td>
+                                </tr>
+                                <tr>
+                                    <td>תאריך, undefined מותרים</td>
+                                    <td>רק: string, number, boolean, null, array, object</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="demo-code">
+                            <pre><code>// ✅ JavaScript Object
+let person = {
+  name: "אלכס",        // ללא מרכאות במפתח
+  age: 30,
+  greet: function() {  // פונקציה מותרת!
+    return "שלום";
+  }
+};
+
+// ✅ JSON (זה בעצם string!)
+let jsonString = '{"name":"אלכס","age":30}';
+
+// המרה בין השניים:
+let obj = JSON.parse(jsonString);      // JSON → Object
+let json = JSON.stringify(person);     // Object → JSON</code></pre>
+                        </div>
+                        
+                        <p style="background: #e3f2fd; padding: 15px; border-radius: 10px; margin-top: 20px;">
+                            <strong>💡 מתי משתמשים ב-JSON?</strong><br>
+                            כשצריך לשלוח מידע בין server ל-client, או לשמור מידע בקובץ. JSON הוא פורמט טקסט שכל השפות מבינות!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">📝 תרגול - יצירת אוביקטים</h3>
+            <div class="exercise-box">
+                <p><strong>משימה:</strong> צרו אוביקט שמתאר את עצמכם!</p>
+                
+                <div style="background: #f0f4ff; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4 style="color: #1976d2;">האוביקט צריך לכלול:</h4>
+                    <ul style="line-height: 2; font-size: 1.1rem; margin-right: 30px;">
+                        <li>שם מלא (firstName, lastName)</li>
+                        <li>גיל</li>
+                        <li>עיר מגורים</li>
+                        <li>תחביבים (מערך)</li>
+                        <li>פונקציה שמציגה "שלום, אני [שם]"</li>
+                    </ul>
+                </div>
+                
+                <h4 style="color: #2e7d32;">✨ דוגמה לפתרון:</h4>
+                <div class="code-section">
+                    <pre><code>let myProfile = {
+  firstName: "דני",
+  lastName: "כהן",
+  age: 22,
+  city: "ירושלים",
+  hobbies: ["תכנות", "ספורט", "מוזיקה"],
+  introduce: function() {
+    return `שלום, אני ${this.firstName} ${this.lastName}`;
+  }
+};
+
+console.log(myProfile.introduce());
+console.log("תחביבים:", myProfile.hobbies);
+console.log("תחביב ראשון:", myProfile.hobbies[0]);</code></pre>
+                </div>
+                <button class="run-btn" onclick="runObjectExercise()">▶ הרץ דוגמה</button>
+                <div class="output" id="outputObjectExercise"></div>
+                
+                <p style="margin-top: 20px; background: #fff3cd; padding: 15px; border-radius: 10px; border-right: 4px solid #ffc107;">
+                    <strong>💡 טיפ מתקדם:</strong> נסו להוסיף אוביקט מקונן בתוך האוביקט - לדוגמה, address עם city ו-street!
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 10: IEEE 754 -->
+        <div class="slide">
+            <h2>תקן IEEE 754 Double Precision</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>רכיב</th>
+                        <th>תפקיד</th>
+                        <th>ביטים</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Sign</td><td>חיובי/שלילי</td><td>1</td></tr>
+                    <tr><td>Exponent</td><td>חזקה (גודל המספר)</td><td>11</td></tr>
+                    <tr><td>Mantissa</td><td>ערך ממשי (שבר)</td><td>52</td></tr>
+                </tbody>
+            </table>
+            <div class="ieee-visual">
+                <div class="bit-section sign">S</div>
+                <div class="bit-section exponent">Exponent (11)</div>
+                <div class="bit-section mantissa">Mantissa (52)</div>
+            </div>
+            <p class="note">💡 המספרים נשמרים בבינארי (Base 2) ולכן שברים מסוימים לא ניתנים לייצוג מדויק.</p>
+        </div>
+
+        <!-- Slide 10: Immutable vs Mutable -->
+        <div class="slide">
+            <h2>Immutable מול Mutable</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>סוג נתון</th>
+                        <th>Immutable (בלתי ניתן לשינוי)</th>
+                        <th>Mutable (ניתן לשינוי)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>String</td><td>✅</td><td>❌</td></tr>
+                    <tr><td>Number</td><td>✅</td><td>❌</td></tr>
+                    <tr><td>Boolean</td><td>✅</td><td>❌</td></tr>
+                    <tr><td>Object</td><td>❌</td><td>✅</td></tr>
+                    <tr><td>Array</td><td>❌</td><td>✅</td></tr>
+                </tbody>
+            </table>
+            
+            <h3>📝 דוגמאות בסיסיות:</h3>
+            <div class="interactive-code">
+                <pre><code>let text = "Hello";
+text[0] = "J"; // לא ישתנה
+console.log(text);
+
+const colors = ["red", "green"];
+colors.push("blue"); // עובד
+console.log(colors);</code></pre>
+                <button class="run-btn" onclick="runCode5()">הרץ קוד בסיסי</button>
+                <div class="output" id="output5"></div>
+            </div>
+            
+            <h3>🔥 דוגמאות מעניינות:</h3>
+            
+            <div class="interesting-facts">
+                <div class="fact-item">
+                    <strong>1. חיבור מספר לסטרינג (Type Coercion):</strong>
+                    <pre><code>// מספר + מחרוזת = מחרוזת!
+let num = 5;
+let text = "10";
+let result = num + text;
+console.log(result);        // "510" (לא 15!)
+console.log(typeof result); // "string"
+
+// דוגמאות נוספות:
+console.log(5 + "5");       // "55"
+console.log("5" + 5);       // "55"
+console.log(5 + 5 + "5");   // "105" (5+5=10, ואז "10"+"5")
+console.log("5" + 5 + 5);   // "555" ("5"+"5"="55", ואז "55"+5)
+
+// להמיר חזרה למספר:
+console.log(Number("10"));  // 10
+console.log(parseInt("10"))// 10
+console.log(+"10");         // 10 (פלוס אונרי)</code></pre>
+                    <button class="mini-run-btn" onclick="runImmutableFact1()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputImmutableFact1"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>2. כל פעולה על String יוצרת מחרוזת חדשה:</strong>
+                    <pre><code>let original = "JavaScript";
+let upper = original.toUpperCase();
+let sliced = original.slice(0, 4);
+
+console.log("original:", original);     // "JavaScript"
+console.log("upper:", upper);           // "JAVASCRIPT"
+console.log("sliced:", sliced);         // "Java"
+
+// המקור לא השתנה!
+console.log("original עדיין:", original); // "JavaScript"
+
+// שרשור מחרוזות:
+let str = "Hello";
+str += " World";  // בעצם: str = str + " World"
+console.log(str); // "Hello World" (מחרוזת חדשה!)</code></pre>
+                    <button class="mini-run-btn" onclick="runImmutableFact2()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputImmutableFact2"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>3. שינוי מערכים ואובייקטים (Mutable):</strong>
+                    <pre><code>// מערכים
+const arr = [1, 2, 3];
+arr.push(4);          // הוספה
+arr[0] = 100;         // שינוי ערך
+arr.pop();            // הסרה
+console.log(arr);     // [100, 2, 3]
+
+// אובייקטים
+const person = { name: "Alex", age: 25 };
+person.age = 26;               // שינוי
+person.city = "Tel Aviv";      // הוספה
+delete person.name;            // מחיקה
+console.log(person);           // { age: 26, city: "Tel Aviv" }
+
+// הפניה משותפת - היזהר!
+const arr1 = [1, 2, 3];
+const arr2 = arr1;  // לא עותק! אותה הפניה
+arr2.push(4);
+console.log(arr1);  // [1, 2, 3, 4] - גם arr1 השתנה!</code></pre>
+                    <button class="mini-run-btn" onclick="runImmutableFact3()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputImmutableFact3"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>4. איך לעשות עותק אמיתי:</strong>
+                    <pre><code>// דרך 1: Spread Operator (לרמה אחת)
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1];  // עותק!
+arr2.push(4);
+console.log(arr1);  // [1, 2, 3] - לא השתנה
+console.log(arr2);  // [1, 2, 3, 4]
+
+const obj1 = { name: "Alex", age: 25 };
+const obj2 = { ...obj1 };  // עותק!
+obj2.age = 30;
+console.log(obj1.age);  // 25 - לא השתנה
+console.log(obj2.age);  // 30
+
+// דרך 2: JSON (לעומק מלא)
+const deep = { user: { name: "Alex" } };
+const deepCopy = JSON.parse(JSON.stringify(deep));
+deepCopy.user.name = "Sara";
+console.log(deep.user.name);     // "Alex" - לא השתנה
+console.log(deepCopy.user.name); // "Sara"</code></pre>
+                    <button class="mini-run-btn" onclick="runImmutableFact4()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputImmutableFact4"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>5. פעולות מתמטיות עם Strings:</strong>
+                    <pre><code>// חיבור - הופך הכל למחרוזת
+console.log("5" + 3);        // "53"
+console.log("Hello" + 5);    // "Hello5"
+console.log(5 + 3 + "2");    // "82" (5+3=8, ואז "8"+"2")
+
+// פעולות אחרות - מנסה להמיר למספר
+console.log("10" - 5);       // 5
+console.log("10" * 2);       // 20
+console.log("10" / 2);       // 5
+console.log("10" % 3);       // 1
+
+// אבל אם לא ניתן להמרה:
+console.log("Hello" - 5);    // NaN (Not a Number)
+console.log("Hello" * 2);    // NaN</code></pre>
+                    <button class="mini-run-btn" onclick="runImmutableFact5()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputImmutableFact5"></div>
+                </div>
+            </div>
+            
+            <!-- Class Question -->
+            <div class="class-question-container">
+                <button class="question-btn" onclick="showQuestion('q10')">🤔 שאלה לכיתה</button>
+                <div class="class-question" id="question-q10" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה:</h4>
+                        <p>מה יקרה בקוד הבא?</p>
+                        <pre><code>let str = "JavaScript";
+str[0] = "j";
+console.log(str);</code></pre>
+                        <p>א) "javaScript" - האות הראשונה תשתנה</p>
+                        <p>ב) "JavaScript" - המחרוזת לא תשתנה</p>
+                        <p>ג) שגיאה</p>
+                        <p>ד) undefined</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('q10')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-q10" style="display: none;">
+                        <h4>✅ תשובה נכונה: ב</h4>
+                        <p><strong>הסבר:</strong></p>
+                        <p>מחרוזות ב-JavaScript הן <strong>Immutable</strong> - לא ניתן לשנות אותן!</p>
+                        <p>ניסיון לשנות תו בודד במחרוזת פשוט יתעלם בשקט (או יזרוק שגיאה ב-strict mode).</p>
+                        <div class="demo-code">
+                            <pre><code>let str = "JavaScript";
+console.log(str[0]);  // "J"
+
+str[0] = "j";  // ניסיון לשינוי - מתעלם!
+console.log(str);  // "JavaScript" - לא השתנה
+
+// הדרך הנכונה:
+str = "j" + str.slice(1);
+console.log(str);  // "javaScript" ✅</code></pre>
+                        </div>
+                        <p>💡 <strong>זכרו:</strong> String, Number, Boolean = Immutable</p>
+                        <p>💡 Array, Object = Mutable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: DOM Interaction -->
+        <div class="slide">
+            <h2>אינטראקציה עם HTML - DOM Events! 🎮</h2>
+            
+            <p><strong>מונחים שכדאי להכיר:</strong></p>
+            <ul style="font-size: 1.1rem; margin-bottom: 30px;">
+                <li><strong>DOM</strong> – המבנה של הדף, כל אלמנט HTML</li>
+                <li><strong>Event (אירוע)</strong> – כשמשהו קורה: לחיצה, ריחוף, גלילה...</li>
+                <li><strong>Event Listener</strong> – "תקשיב" לאירוע ותגיב!</li>
+            </ul>
+            
+            <h3>🎯 בואו נתנסה בכל סוגי האירועים:</h3>
+            <p class="instruction-text">👇 נסו כל אחד!</p>
+            
+            <!-- Click Event -->
+            <div class="event-demo-box">
+                <h4>🖱️ 1. לחיצה (onclick)</h4>
+                <div class="demo-area">
+                    <button class="event-btn" id="clickBtn">לחץ עליי!</button>
+                    <div class="demo-output" id="clickOutput">מחכה ללחיצה...</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>button.onclick = function() {
+  output.innerText = "לחצת! 🎉";
+};</code></pre>
+                </div>
+            </div>
+            
+            <!-- Hover Event -->
+            <div class="event-demo-box">
+                <h4>✨ 2. ריחוף (onmouseenter / onmouseleave)</h4>
+                <div class="demo-area">
+                    <div class="hover-box" id="hoverBox">עבור עליי עם העכבר!</div>
+                    <div class="demo-output" id="hoverOutput">עדיין לא ריחפת...</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>element.onmouseenter = function() {
+  this.style.background = "gold";
+};</code></pre>
+                </div>
+            </div>
+            
+            <!-- Mouse Move Event -->
+            <div class="event-demo-box">
+                <h4>🎯 3. תזוזת עכבר (onmousemove)</h4>
+                <div class="demo-area">
+                    <div class="tracking-area" id="trackArea">
+                        הזז את העכבר פה!
+                        <div class="mouse-tracker" id="mouseTracker">🎯</div>
+                    </div>
+                    <div class="demo-output" id="trackOutput">X: 0, Y: 0</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>element.onmousemove = function(e) {
+  let x = e.offsetX;
+  let y = e.offsetY;
+  console.log("מיקום:", x, y);
+};</code></pre>
+                </div>
+            </div>
+            
+            <!-- Double Click Event -->
+            <div class="event-demo-box">
+                <h4>👆👆 4. לחיצה כפולה (ondblclick)</h4>
+                <div class="demo-area">
+                    <div class="dblclick-box" id="dblClickBox">תלחץ עליי פעמיים!</div>
+                    <div class="demo-output" id="dblClickOutput">מחכה ללחיצה כפולה...</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>element.ondblclick = function() {
+  this.style.transform = "rotate(360deg)";
+};</code></pre>
+                </div>
+            </div>
+            
+            <!-- Keyboard Event -->
+            <div class="event-demo-box">
+                <h4>⌨️ 5. הקלדה (onkeydown / onkeyup)</h4>
+                <div class="demo-area">
+                    <input type="text" class="key-input" id="keyInput" placeholder="התחל להקליד...">
+                    <div class="demo-output" id="keyOutput">עדיין לא הקלדת...</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>input.onkeyup = function(e) {
+  output.innerText = "הקלדת: " + e.key;
+};</code></pre>
+                </div>
+            </div>
+            
+            <!-- Scroll Event -->
+            <div class="event-demo-box">
+                <h4>🎢 6. גלילה (onscroll)</h4>
+                <div class="demo-area">
+                    <div class="scroll-box" id="scrollBox">
+                        <p>גלול למטה! 👇</p>
+                        <p style="margin-top: 100px;">עוד קצת...</p>
+                        <p style="margin-top: 100px;">כמעט!</p>
+                        <p style="margin-top: 100px;">🎉 הגעת לסוף!</p>
+                    </div>
+                    <div class="demo-output" id="scrollOutput">עמדה: 0%</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>element.onscroll = function() {
+  let scrollTop = this.scrollTop;
+  let scrollHeight = this.scrollHeight;
+  let percent = (scrollTop / scrollHeight) * 100;
+};</code></pre>
+                </div>
+            </div>
+            
+            <!-- Focus / Blur Event -->
+            <div class="event-demo-box">
+                <h4>🎯 7. פוקוס (onfocus / onblur)</h4>
+                <div class="demo-area">
+                    <input type="text" class="focus-input" id="focusInput" placeholder="לחץ כאן...">
+                    <div class="demo-output" id="focusOutput">השדה לא פעיל</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>input.onfocus = function() {
+  this.style.borderColor = "green";
+};
+
+input.onblur = function() {
+  this.style.borderColor = "gray";
+};</code></pre>
+                </div>
+            </div>
+            
+            <!-- Context Menu Event -->
+            <div class="event-demo-box">
+                <h4>🖱️ 8. לחיצה ימנית (oncontextmenu)</h4>
+                <div class="demo-area">
+                    <div class="context-box" id="contextBox">לחץ עליי לחיצה ימנית!</div>
+                    <div class="demo-output" id="contextOutput">עדיין לא לחצת...</div>
+                </div>
+                <div class="code-example">
+                    <pre><code>element.oncontextmenu = function(e) {
+  e.preventDefault(); // מונע תפריט
+  alert("לחצת ימני!");
+};</code></pre>
+                </div>
+            </div>
+            
+            <div class="summary-box" style="margin-top: 30px;">
+                <h4>📌 סיכום האירועים:</h4>
+                <ul>
+                    <li><code>onclick</code> - לחיצה רגילה</li>
+                    <li><code>ondblclick</code> - לחיצה כפולה</li>
+                    <li><code>onmouseenter / onmouseleave</code> - כניסה/יציאה מאלמנט</li>
+                    <li><code>onmousemove</code> - תזוזת עכבר</li>
+                    <li><code>onkeydown / onkeyup</code> - לחיצה על מקש</li>
+                    <li><code>onscroll</code> - גלילה</li>
+                    <li><code>onfocus / onblur</code> - פוקוס על שדה</li>
+                    <li><code>oncontextmenu</code> - לחיצה ימנית</li>
+                </ul>
+                <p class="tip">💡 <strong>טיפ:</strong> יש עוד המון אירועים - אלה הכי חשובים להתחלה!</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Functions -->
+        <div class="slide">
+            <h2>פונקציות (Functions)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>סוג פונקציה</th>
+                        <th>דוגמה</th>
+                        <th>תיאור</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Declaration</td><td><code>function greet(){}</code></td><td>צורה קלאסית</td></tr>
+                    <tr><td>Expression</td><td><code>const greet = function(){}</code></td><td>נשמרת במשתנה</td></tr>
+                    <tr><td>Arrow</td><td><code>const greet = () => {}</code></td><td>תחביר מודרני</td></tr>
+                </tbody>
+            </table>
+            <h3>📝 דוגמאות בסיסיות:</h3>
+            <div class="interactive-code">
+                <pre><code>function greet(name) {
+  return "שלום " + name;
+}
+
+const sum = (a, b) => a + b;
+
+console.log(greet("Alex"));
+console.log("5 + 3 =", sum(5, 3));</code></pre>
+                <button class="run-btn" onclick="runCode6()">הרץ קוד בסיסי</button>
+                <div class="output" id="output6"></div>
+            </div>
+            
+            <h3>🔥 דוגמאות מתקדמות:</h3>
+            
+            <div class="interesting-facts">
+                <div class="fact-item">
+                    <strong>1. שימוש חוזר בפונקציות - למה הן כל כך שימושיות:</strong>
+                    <pre><code>// במקום לכתוב את אותו קוד 100 פעם...
+function calculateDiscount(price, percent) {
+  return price - (price * percent / 100);
+}
+
+// פשוט קוראים לפונקציה!
+console.log("מחיר אחרי 10%:", calculateDiscount(100, 10));  // 90
+console.log("מחיר אחרי 25%:", calculateDiscount(200, 25));  // 150
+console.log("מחיר אחרי 50%:", calculateDiscount(80, 50));   // 40
+
+// חסכנו הרבה קוד! 🎉
+// שינוי אחד בפונקציה = שינוי בכל המקומות!</code></pre>
+                    <button class="mini-run-btn" onclick="runFunctionReuse()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputFunctionReuse"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>2. פונקציה בתוך פונקציה (Nested Functions):</strong>
+                    <pre><code>// פונקציה חיצונית
+function createGreeter(greeting) {
+  // פונקציה פנימית - יש לה גישה ל-greeting!
+  function greet(name) {
+    return greeting + " " + name;
+  }
+  
+  return greet; // מחזירים את הפונקציה הפנימית
+}
+
+// יוצרים "מפעל ברכות"
+const sayHello = createGreeter("שלום");
+const sayHi = createGreeter("היי");
+const sayGoodMorning = createGreeter("בוקר טוב");
+
+console.log(sayHello("דני"));          // "שלום דני"
+console.log(sayHi("שרה"));             // "היי שרה"
+console.log(sayGoodMorning("אלכס"));   // "בוקר טוב אלכס"
+
+// זה נקרא Closure - הפונקציה הפנימית "זוכרת" את greeting!</code></pre>
+                    <button class="mini-run-btn" onclick="runNestedFunction()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputNestedFunction"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>3. פונקציה שקוראת לעצמה - Recursion (רקורסיה):</strong>
+                    <pre><code>// דוגמה 1: חישוב עצרת (Factorial)
+function factorial(n) {
+  console.log(`מחשב: ${n}!`);
+  
+  if (n === 0 || n === 1) {
+    return 1; // תנאי עצירה!
+  }
+  
+  return n * factorial(n - 1); // קוראת לעצמה!
+}
+
+console.log("5! =", factorial(5));
+// 5! = 5 × 4 × 3 × 2 × 1 = 120
+
+// דוגמה 2: ספירה לאחור
+function countdown(num) {
+  console.log(num);
+  
+  if (num <= 0) {
+    console.log("🚀 המראה!");
+    return;
+  }
+  
+  countdown(num - 1); // קוראת לעצמה עם מספר קטן יותר
+}
+
+countdown(5); // 5, 4, 3, 2, 1, 0, המראה!</code></pre>
+                    <button class="mini-run-btn" onclick="runRecursiveFunction()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputRecursiveFunction"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>4. דוגמה מורכבת: רקורסיה עם מערכים:</strong>
+                    <pre><code>// סכום כל המספרים במערך (בצורה רקורסיבית)
+function sumArray(arr) {
+  // תנאי עצירה: מערך ריק
+  if (arr.length === 0) {
+    return 0;
+  }
+  
+  // לוקחים את האיבר הראשון + סכום השאר
+  return arr[0] + sumArray(arr.slice(1));
+}
+
+const numbers = [1, 2, 3, 4, 5];
+console.log("סכום:", sumArray(numbers));  // 15
+
+// איך זה עובד:
+// [1, 2, 3, 4, 5] → 1 + sumArray([2, 3, 4, 5])
+// [2, 3, 4, 5]    → 2 + sumArray([3, 4, 5])
+// [3, 4, 5]       → 3 + sumArray([4, 5])
+// [4, 5]          → 4 + sumArray([5])
+// [5]             → 5 + sumArray([])
+// []              → 0
+// תוצאה: 1+2+3+4+5+0 = 15</code></pre>
+                    <button class="mini-run-btn" onclick="runRecursiveArray()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputRecursiveArray"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>5. פונקציות כפרמטרים (Callback Functions):</strong>
+                    <pre><code>// פונקציה שמקבלת פונקציה אחרת כפרמטר!
+function doMath(a, b, operation) {
+  return operation(a, b); // קוראים לפונקציה שקיבלנו
+}
+
+// פונקציות שונות
+const add = (x, y) => x + y;
+const multiply = (x, y) => x * y;
+const power = (x, y) => Math.pow(x, y);
+
+// משתמשים באותה פונקציה עם פעולות שונות
+console.log("5 + 3 =", doMath(5, 3, add));       // 8
+console.log("5 * 3 =", doMath(5, 3, multiply));  // 15
+console.log("5 ^ 3 =", doMath(5, 3, power));     // 125
+
+// גם inline!
+console.log("5 - 3 =", doMath(5, 3, (a, b) => a - b)); // 2</code></pre>
+                    <button class="mini-run-btn" onclick="runCallbackFunction()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputCallbackFunction"></div>
+                </div>
+            </div>
+            
+            <!-- Class Question -->
+            <div class="class-question-container">
+                <button class="question-btn" onclick="showQuestion('q12')">🤔 שאלה לכיתה</button>
+                <div class="class-question" id="question-q12" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה:</h4>
+                        <p>מה ההבדל המרכזי בין שתי הפונקציות הבאות?</p>
+                        <pre><code>// 1
+function calculate(x, y) {
+  console.log(x + y);
+}
+
+// 2
+const calculate = (x, y) => {
+  return x + y;
+}</code></pre>
+                        <p>א) הראשונה לא מחזירה ערך, השנייה כן</p>
+                        <p>ב) הראשונה מדפיסה, השנייה לא</p>
+                        <p>ג) שתיהן זהות לחלוטין</p>
+                        <p>ד) א' וב' נכונות</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('q12')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-q12" style="display: none;">
+                        <h4>✅ תשובה נכונה: ד</h4>
+                        <p><strong>הסבר:</strong></p>
+                        <p>שתי הפונקציות שונות לחלוטין:</p>
+                        <p><strong>פונקציה 1:</strong> מדפיסה בקונסול אבל לא מחזירה ערך (return undefined)</p>
+                        <p><strong>פונקציה 2:</strong> מחזירה ערך אבל לא מדפיסה אותו</p>
+                        <div class="demo-code">
+                            <pre><code>// דוגמה:
+function printSum(x, y) {
+  console.log(x + y);  // יודפס: 8
+}
+const result1 = printSum(5, 3);
+console.log(result1);  // undefined
+
+const returnSum = (x, y) => x + y;
+const result2 = returnSum(5, 3);
+console.log(result2);  // 8</code></pre>
+                        </div>
+                        <p>💡 <strong>כלל זהב:</strong> console.log להדפסה בלבד, return להחזרת ערך לשימוש נוסף!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Function Concepts -->
+        <div class="slide">
+            <h2>Scope - החוק הכי חשוב בפונקציות! 🔒</h2>
+            
+            <p style="font-size: 1.2rem; margin: 20px 0;">
+                <strong>Scope (תחום תקפות)</strong> = איפה המשתנה "חי" ואיפה אפשר להשתמש בו
+            </p>
+            
+            <h3>📝 דוגמה בסיסית:</h3>
+            <div class="interactive-code">
+                <pre><code>function add(a, b) {
+  let result = a + b; // Scope מקומי - רק בתוך הפונקציה!
+  return result;
+}
+
+console.log("תוצאה:", add(10, 20));  // ✅ עובד
+// console.log(result);  // ❌ שגיאה! result לא קיים כאן</code></pre>
+                <button class="run-btn" onclick="runCode7()">הרץ קוד בסיסי</button>
+                <div class="output" id="output7"></div>
+            </div>
+            
+            <h3>🔥 3 סוגי Scope - חשוב להבין!</h3>
+            
+            <div class="interesting-facts">
+                <div class="fact-item">
+                    <strong>1. Global Scope (גלובלי) - כולם רואים אותו:</strong>
+                    <pre><code>// משתנה גלובלי - נגיש מכל מקום!
+let globalVar = "אני גלובלי";
+
+function test1() {
+  console.log(globalVar);  // ✅ עובד
+}
+
+function test2() {
+  console.log(globalVar);  // ✅ עובד
+}
+
+test1();  // "אני גלובלי"
+test2();  // "אני גלובלי"
+console.log(globalVar);  // ✅ גם כאן עובד!
+
+// ⚠️ היזהר: כולם יכולים לשנות אותו!
+function changeGlobal() {
+  globalVar = "שוניתי!";
+}
+changeGlobal();
+console.log(globalVar);  // "שוניתי!" - השתנה!</code></pre>
+                    <button class="mini-run-btn" onclick="runScopeGlobal()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputScopeGlobal"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>2. Function Scope (תחום פונקציה) - רק בתוך הפונקציה:</strong>
+                    <pre><code>function myFunction() {
+  let localVar = "אני מקומי";
+  console.log(localVar);  // ✅ עובד - אנחנו בפנים
+}
+
+myFunction();  // "אני מקומי"
+// console.log(localVar);  // ❌ שגיאה! localVar לא קיים כאן
+
+// דוגמה עם פרמטרים
+function greet(name) {  // name הוא מקומי!
+  let message = "שלום " + name;  // message מקומי!
+  console.log(message);
+}
+
+greet("דני");  // עובד
+// console.log(name);     // ❌ שגיאה!
+// console.log(message);  // ❌ שגיאה!</code></pre>
+                    <button class="mini-run-btn" onclick="runScopeFunction()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputScopeFunction"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>3. Block Scope (תחום בלוק) - רק בתוך { }:</strong>
+                    <pre><code>// let ו-const עובדים ברמת בלוק!
+if (true) {
+  let blockVar = "אני בבלוק";
+  const blockConst = "גם אני";
+  console.log(blockVar);  // ✅ עובד כאן
+}
+// console.log(blockVar);  // ❌ שגיאה! יצאנו מהבלוק
+
+// לולאות - כל איטרציה היא scope נפרד!
+for (let i = 0; i < 3; i++) {
+  let loopVar = "איטרציה " + i;
+  console.log(loopVar);  // עובד בפנים
+}
+// console.log(i);  // ❌ שגיאה!
+
+// var לא מכבד block scope! (עוד סיבה לא להשתמש בו)
+if (true) {
+  var oldStyle = "אני var";
+}
+console.log(oldStyle);  // ✅ עובד! (לא טוב!)</code></pre>
+                    <button class="mini-run-btn" onclick="runScopeBlock()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputScopeBlock"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>4. Scope Chain - חיפוש משתנים:</strong>
+                    <pre><code>let global = "גלובלי";
+
+function outer() {
+  let outerVar = "חיצוני";
+  
+  function inner() {
+    let innerVar = "פנימי";
+    
+    // inner יכולה לראות הכל!
+    console.log(innerVar);   // ✅ "פנימי" - scope עצמי
+    console.log(outerVar);   // ✅ "חיצוני" - scope אבא
+    console.log(global);     // ✅ "גלובלי" - scope סבא
+  }
+  
+  inner();
+  // console.log(innerVar);  // ❌ לא רואה פנימה!
+}
+
+outer();
+// JavaScript מחפש משתנה: עצמי → אבא → סבא → גלובלי</code></pre>
+                    <button class="mini-run-btn" onclick="runScopeChain()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputScopeChain"></div>
+                </div>
+            </div>
+            
+            <h3>🎯 בונוס: העברת פונקציה כפרמטר</h3>
+            <div class="interactive-code">
+                <pre><code>// פונקציה שמקבלת מערך ופונקציה
+function processArray(arr, processor) {
+  const results = [];
+  for (let item of arr) {
+    results.push(processor(item));  // קוראים לפונקציה על כל איבר
+  }
+  return results;
+}
+
+const numbers = [1, 2, 3, 4, 5];
+
+// פונקציות עיבוד שונות
+const double = (x) => x * 2;
+const square = (x) => x * x;
+const addTen = (x) => x + 10;
+
+console.log("כפל ב-2:", processArray(numbers, double));
+console.log("בריבוע:", processArray(numbers, square));
+console.log("הוסף 10:", processArray(numbers, addTen));
+
+// זה הבסיס ל-map, filter, reduce!</code></pre>
+                <button class="run-btn" onclick="runBonusCallback()">הרץ בונוס</button>
+                <div class="output" id="outputBonusCallback"></div>
+            </div>
+            
+            <!-- Class Question -->
+            <div class="class-question-container">
+                <button class="question-btn" onclick="showQuestion('q13')">🤔 שאלה לכיתה</button>
+                <div class="class-question" id="question-q13" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה מאתגרת על Scope:</h4>
+                        <p>מה יודפס בקונסול?</p>
+                        <pre><code>let x = "חוץ";
+
+function test() {
+  console.log(x);
+  let x = "פנים";
+  console.log(x);
+}
+
+test();</code></pre>
+                        <p>א) "חוץ", "פנים"</p>
+                        <p>ב) "פנים", "פנים"</p>
+                        <p>ג) שגיאה בשורה הראשונה</p>
+                        <p>ד) undefined, "פנים"</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('q13')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-q13" style="display: none;">
+                        <h4>תשובה נכונה: ג - שגיאה בשורה הראשונה</h4>
+                        
+                        <p><strong>הסבר מפורט:</strong></p>
+                        
+                        <h4 style="color: #e65100; margin: 15px 0;">שלב 1: JavaScript סורק את הקוד</h4>
+                        <p>לפני שהקוד רץ, JavaScript עובר על הפונקציה ורואה שיש הגדרה של <code>let x = "פנים"</code> בשורה 3.</p>
+                        <p>JavaScript מחליט: "כל שימוש ב-x בפונקציה הזו מתייחס ל-x המקומי, לא לגלובלי."</p>
+                        
+                        <h4 style="color: #e65100; margin: 15px 0;">שלב 2: ריצת הקוד</h4>
+                        <div class="demo-code">
+                            <pre><code>function test() {
+  // <- כאן מתחיל ה-Temporal Dead Zone של x
+  console.log(x);  // x קיים אבל עדיין לא אותחל -> שגיאה
+  let x = "פנים"; // <- רק כאן x מאותחל (TDZ נגמר)
+  console.log(x);  // עכשיו x נגיש
+}</code></pre>
+                        </div>
+                        
+                        <p><strong>Temporal Dead Zone (TDZ)</strong> = התקופה מתחילת הבלוק עד שהמשתנה מאותחל.</p>
+                        <p>במהלך TDZ, המשתנה קיים אבל לא ניתן להשתמש בו.</p>
+                        
+                        <h4 style="color: #e65100; margin: 15px 0;">איך לתקן?</h4>
+                        <div class="demo-code">
+                            <pre><code>// פתרון 1: הגדירו קודם
+let x = "חוץ";
+function test() {
+  let x = "פנים";  // הגדרה ראשונה
+  console.log(x);   // "פנים"
+}
+
+// פתרון 2: השתמשו בגלובלי
+let y = "חוץ";
+function test2() {
+  console.log(y);   // "חוץ" - אין y מקומי
+  let z = "פנים";
+  console.log(z);   // "פנים"
+}
+
+// פתרון 3: שמות שונים
+let outerX = "חוץ";
+function test3() {
+  console.log(outerX);  // "חוץ"
+  let innerX = "פנים";
+  console.log(innerX);  // "פנים"
+}</code></pre>
+                        </div>
+                        
+                        <p><strong>כללי זהב:</strong></p>
+                        <ul style="text-align: right; margin-right: 20px;">
+                            <li>הגדירו משתנים בהתחלת הפונקציה או הבלוק</li>
+                            <li>השתמשו בשמות שונים למשתנים גלובליים ומקומיים</li>
+                            <li>let/const בטוחים יותר מ-var כי הם תופסים את הטעות הזו מוקדם</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">תרגול בכיתה - בדיקה עצמית</h3>
+            <div class="exercise-box">
+                <p><strong>נסו לנבא מה יקרה בכל קטע קוד:</strong></p>
+                
+                <div class="code-section" style="margin: 15px 0;">
+                    <pre><code>// ניסוי 1: var
+function testVar() {
+  console.log(typeof x);
+  var x = 5;
+  console.log(x);
+}
+testVar();
+
+// ניסוי 2: let
+function testLet() {
+  console.log(typeof x);
+  let x = 5;
+  console.log(x);
+}
+testLet();
+
+// ניסוי 3: גישה לגלובלי
+let global = 10;
+function testGlobal() {
+  console.log(global);
+}
+testGlobal();
+
+// ניסוי 4: TDZ
+let global2 = 10;
+function testTDZ() {
+  console.log(global2);
+  let global2 = 20;
+}
+testTDZ();</code></pre>
+                </div>
+                
+                <p><strong>שאלות לדיון:</strong></p>
+                <ul style="text-align: right; margin-right: 30px; font-size: 1.1rem;">
+                    <li>מה יודפס בניסוי 1? (var)</li>
+                    <li>מה יקרה בניסוי 2? (let)</li>
+                    <li>מה יודפס בניסוי 3? (גלובלי)</li>
+                    <li>מה יקרה בניסוי 4? (TDZ)</li>
+                </ul>
+                
+                <button class="run-btn" onclick="runScopeExercise()" style="margin-top: 20px;">הרץ את כל הניסויים (אחד אחרי השני)</button>
+                <div class="output" id="outputScopeExercise"></div>
+            </div>
+        </div>
+
+        <!-- New Slide: Loops (לולאות) -->
+        <div class="slide">
+            <h2>לולאות (Loops) - איך לעשות משימות שוב ושוב! 🔄</h2>
+            
+            <p style="font-size: 1.2rem; margin: 20px 0;">
+                <strong>לולאה</strong> = דרך להריץ קוד מספר פעמים בלי לכתוב אותו שוב ושוב
+            </p>
+            
+            <h3>📝 למה צריך לולאות?</h3>
+            <div class="code-section">
+                <pre><code>// ❌ בלי לולאה - מייגע ומבולגן!
+console.log(1);
+console.log(2);
+console.log(3);
+console.log(4);
+console.log(5);
+
+// ✅ עם לולאה - נקי ויעיל!
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}</code></pre>
+            </div>
+            
+            <h3>🔥 3 סוגי לולאות עיקריות ב-JavaScript:</h3>
+            
+            <div class="interesting-facts">
+                <div class="fact-item">
+                    <strong>1. for - הלולאה הכי נפוצה:</strong>
+                    <pre><code>// תחביר: for (התחלה; תנאי; צעד)
+for (let i = 0; i < 5; i++) {
+  console.log("פעם", i);
+}
+
+// דוגמאות מעשיות:
+// ספירה לאחור
+for (let i = 10; i >= 0; i--) {
+  console.log(i);
+}
+console.log("🚀 המראה!");
+
+// קפיצות
+for (let i = 0; i <= 20; i += 5) {
+  console.log(i);  // 0, 5, 10, 15, 20
+}
+
+// לולאה על מערך
+const fruits = ["תפוח", "בננה", "תפוז"];
+for (let i = 0; i < fruits.length; i++) {
+  console.log(i + ": " + fruits[i]);
+}</code></pre>
+                    <button class="mini-run-btn" onclick="runLoopFor()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputLoopFor"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>2. while - כשלא יודעים כמה פעמים:</strong>
+                    <pre><code>// while רצה כל עוד התנאי true
+let count = 0;
+while (count < 5) {
+  console.log("ספירה:", count);
+  count++;
+}
+
+// דוגמה: חיפוש במערך
+const numbers = [2, 5, 8, 12, 15];
+let i = 0;
+let found = false;
+
+while (i < numbers.length && !found) {
+  if (numbers[i] > 10) {
+    console.log("מצאתי מספר גדול מ-10:", numbers[i]);
+    found = true;
+  }
+  i++;
+}
+
+// ⚠️ היזהר: וודא שהלולאה תיפסק!
+// while (true) { } ← לולאה אינסופית! הדפדפן ייקפא!</code></pre>
+                    <button class="mini-run-btn" onclick="runLoopWhile()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputLoopWhile"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>3. do...while - לפחות פעם אחת:</strong>
+                    <pre><code>// do...while רצה לפחות פעם אחת, גם אם התנאי false
+let count2 = 10;
+
+do {
+  console.log("ספירה:", count2);
+  count2++;
+} while (count2 < 5);
+
+// התנאי false (10 לא קטן מ-5), אבל הקוד רץ פעם אחת!
+
+// דוגמה מעשית: בקש קלט עד שהמשתמש מכניס משהו
+let userInput = "";
+do {
+  console.log("אנא הכנס משהו...");
+  // userInput = prompt("הכנס טקסט:"); // בפועל
+  userInput = "טקסט";  // סימולציה
+} while (userInput === "");
+
+console.log("תודה! הכנסת:", userInput);</code></pre>
+                    <button class="mini-run-btn" onclick="runLoopDoWhile()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputLoopDoWhile"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>4. לולאות מתקדמות - for...of ו-for...in:</strong>
+                    <pre><code>// for...of - לעבור על ערכים במערך (הכי נוח!)
+const colors = ["אדום", "כחול", "ירוק"];
+
+for (let color of colors) {
+  console.log("צבע:", color);
+}
+
+// for...in - לעבור על מפתחות באוביקט
+const person = {
+  name: "דני",
+  age: 22,
+  city: "תל אביב"
+};
+
+for (let key in person) {
+  console.log(key + ":", person[key]);
+}
+
+// השוואה:
+const arr = ["א", "ב", "ג"];
+
+for (let i = 0; i < arr.length; i++) {
+  console.log(i, arr[i]);  // אינדקס, ערך
+}
+
+for (let value of arr) {
+  console.log(value);  // רק ערך
+}</code></pre>
+                    <button class="mini-run-btn" onclick="runLoopAdvanced()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputLoopAdvanced"></div>
+                </div>
+                
+                <div class="fact-item">
+                    <strong>5. בקרת לולאות - break ו-continue:</strong>
+                    <pre><code>// break - עוצר את הלולאה לגמרי
+for (let i = 0; i < 10; i++) {
+  if (i === 5) {
+    console.log("עצרנו ב-5!");
+    break;
+  }
+  console.log(i);
+}
+// תוצאה: 0, 1, 2, 3, 4, עצרנו ב-5!
+
+// continue - מדלג על האיטרציה הנוכחית
+for (let i = 0; i < 10; i++) {
+  if (i % 2 === 0) {
+    continue;  // מדלג על זוגיים
+  }
+  console.log(i);  // רק אי-זוגיים
+}
+// תוצאה: 1, 3, 5, 7, 9
+
+// דוגמה משולבת: מצא את כל המספרים הראשוניים עד 20
+const primes = [];
+for (let num = 2; num <= 20; num++) {
+  let isPrime = true;
+  
+  for (let divisor = 2; divisor < num; divisor++) {
+    if (num % divisor === 0) {
+      isPrime = false;
+      break;  // מצאנו מחלק - לא ראשוני
+    }
+  }
+  
+  if (isPrime) {
+    primes.push(num);
+  }
+}
+console.log("מספרים ראשוניים:", primes);</code></pre>
+                    <button class="mini-run-btn" onclick="runLoopControl()">▶ הרץ דוגמה</button>
+                    <div class="mini-output" id="outputLoopControl"></div>
+                </div>
+            </div>
+            
+            <!-- Class Question 1 -->
+            <div class="class-question-container" style="margin-top: 40px;">
+                <button class="question-btn" onclick="showQuestion('qLoop1')">🤔 שאלה לכיתה 1</button>
+                <div class="class-question" id="question-qLoop1" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה:</h4>
+                        <p>מה יודפס בקוד הבא?</p>
+                        <pre><code>for (let i = 0; i < 5; i++) {
+  if (i === 3) continue;
+  console.log(i);
+}</code></pre>
+                        <p>א) 0, 1, 2</p>
+                        <p>ב) 0, 1, 2, 3, 4</p>
+                        <p>ג) 0, 1, 2, 4</p>
+                        <p>ד) 1, 2, 4, 5</p>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('qLoop1')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-qLoop1" style="display: none;">
+                        <h4>תשובה נכונה: ג (0, 1, 2, 4)</h4>
+                        <p><strong>הסבר:</strong></p>
+                        <p>continue מדלג על האיטרציה הנוכחית ועובר לבאה.</p>
+                        <p>כשמגיעים ל-i === 3, continue מדלג על ה-console.log הזה.</p>
+                        <p>הלולאה ממשיכה ל-i = 4.</p>
+                        <div class="demo-code">
+                            <pre><code>// i = 0 → מדפיס 0
+// i = 1 → מדפיס 1
+// i = 2 → מדפיס 2
+// i = 3 → continue! מדלג
+// i = 4 → מדפיס 4
+// i = 5 → i < 5 false, עוצר</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Class Question 2 -->
+            <div class="class-question-container" style="margin-top: 20px;">
+                <button class="question-btn" onclick="showQuestion('qLoop2')">🤔 שאלה לכיתה 2</button>
+                <div class="class-question" id="question-qLoop2" style="display: none;">
+                    <div class="question-box">
+                        <h4>❓ שאלה:</h4>
+                        <p>מה ההבדל בין for...of ל-for...in?</p>
+                        <pre><code>const arr = ["א", "ב", "ג"];
+
+for (let x in arr) {
+  console.log(x);
+}
+
+for (let x of arr) {
+  console.log(x);
+}</code></pre>
+                    </div>
+                    <button class="answer-btn" onclick="showAnswer('qLoop2')">💡 הצג תשובה</button>
+                    <div class="answer-box" id="answer-qLoop2" style="display: none;">
+                        <h4>תשובה:</h4>
+                        <p><strong>for...in</strong> = עוברת על <strong>המפתחות/אינדקסים</strong></p>
+                        <p>תדפיס: 0, 1, 2</p>
+                        
+                        <p><strong>for...of</strong> = עוברת על <strong>הערכים עצמם</strong></p>
+                        <p>תדפיס: "א", "ב", "ג"</p>
+                        
+                        <div class="demo-code">
+                            <pre><code>// for...in במערך → אינדקסים
+for (let index in arr) {
+  console.log(index);        // 0, 1, 2
+  console.log(arr[index]);   // "א", "ב", "ג"
+}
+
+// for...of במערך → ערכים
+for (let value of arr) {
+  console.log(value);  // "א", "ב", "ג"
+}
+
+// for...in באוביקט → מפתחות (keys)
+const obj = {a: 1, b: 2};
+for (let key in obj) {
+  console.log(key);        // "a", "b"
+  console.log(obj[key]);   // 1, 2
+}</code></pre>
+                        </div>
+                        
+                        <p style="background: #e8f5e9; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                            <strong>כלל אצבע:</strong><br>
+                            • מערך → השתמשו ב-for...of (ערכים)<br>
+                            • אוביקט → השתמשו ב-for...in (מפתחות)
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note" style="margin-top: 30px; background: #fff3cd; border-color: #ffc107;">
+                <h4>📌 סיכום לולאות:</h4>
+                <ul style="line-height: 2;">
+                    <li><strong>for</strong> - כשיודעים כמה פעמים (הכי נפוץ)</li>
+                    <li><strong>while</strong> - כשלא יודעים כמה פעמים (בדיקה בהתחלה)</li>
+                    <li><strong>do...while</strong> - לפחות פעם אחת (בדיקה בסוף)</li>
+                    <li><strong>for...of</strong> - לעבור על ערכים במערך</li>
+                    <li><strong>for...in</strong> - לעבור על מפתחות באוביקט</li>
+                    <li><strong>break</strong> - יציאה מהלולאה</li>
+                    <li><strong>continue</strong> - דילוג לאיטרציה הבאה</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 14: Class Exercise -->
+        <div class="slide">
+            <h2>תרגול בכיתה</h2>
+            
+            <h3>משימות בסיסיות:</h3>
+            <div class="exercise-box">
+                <p>1️⃣ כתבו פונקציה שמדפיסה ברכה עם שם.</p>
+                <p>2️⃣ פונקציה שמחזירה סכום של שני מספרים.</p>
+                <p>3️⃣ המירו אותן ל-Arrow Functions.</p>
+            </div>
+            <div class="interactive-code">
+                <pre><code>// פתרון משימות 1-3:
+function greeting(name) {
+  console.log("שלום " + name + "!");
+}
+
+function add(a, b) {
+  return a + b;
+}
+
+// Arrow Functions:
+const greetingArrow = (name) => console.log("שלום " + name + "!");
+const addArrow = (a, b) => a + b;
+
+greeting("ישראל");
+console.log(add(7, 8));</code></pre>
+                <button class="run-btn" onclick="runCode8()">הרץ פתרון בסיסי</button>
+                <div class="output" id="output8"></div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">אתגרים מתקדמים:</h3>
+            
+            <div class="exercise-box" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); border-color: #ff9800;">
+                <p>4️⃣ <strong>אתגר: פונקציה בתוך פונקציה</strong></p>
+                <p>צרו פונקציה <code>createMultiplier(factor)</code> שמחזירה פונקציה שמכפילה מספר ב-factor.</p>
+                <p>דוגמה: <code>const multiplyBy5 = createMultiplier(5);</code></p>
+                <p>ואז: <code>multiplyBy5(3)</code> יחזיר 15</p>
+            </div>
+            
+            <div class="interactive-code">
+                <pre><code>// פתרון משימה 4:
+function createMultiplier(factor) {
+  // פונקציה פנימית שזוכרת את factor
+  function multiply(number) {
+    return number * factor;
+  }
+  return multiply;  // מחזירים את הפונקציה הפנימית
+}
+
+// יוצרים מכפילים שונים
+const multiplyBy5 = createMultiplier(5);
+const multiplyBy10 = createMultiplier(10);
+const multiplyBy100 = createMultiplier(100);
+
+console.log("3 * 5 =", multiplyBy5(3));      // 15
+console.log("3 * 10 =", multiplyBy10(3));    // 30
+console.log("3 * 100 =", multiplyBy100(3));  // 300
+
+// זה Closure - הפונקציה הפנימית זוכרת את factor!</code></pre>
+                <button class="run-btn" onclick="runChallenge4()">הרץ אתגר 4</button>
+                <div class="output" id="outputChallenge4"></div>
+            </div>
+            
+            <div class="exercise-box" style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); border-color: #e74c3c;">
+                <p>5️⃣ <strong>אתגר מתקדם: פונקציה רקורסיבית</strong></p>
+                <p>כתבו פונקציה רקורסיבית <code>printNames(names)</code> שמדפיסה מערך שמות אחד אחרי השני.</p>
+                <p>הפונקציה תדפיס את השם הראשון ותקרא לעצמה עם שאר המערך.</p>
+            </div>
+            
+            <div class="interactive-code">
+                <pre><code>// פתרון משימה 5:
+function printNames(names) {
+  // תנאי עצירה: מערך ריק
+  if (names.length === 0) {
+    console.log("סיימנו!");
+    return;
+  }
+  
+  // מדפיס את הראשון
+  console.log(names[0]);
+  
+  // קריאה רקורסיבית עם שאר המערך
+  printNames(names.slice(1));
+}
+
+const students = ["דני", "שרה", "אלכס", "מיכל", "יוסי"];
+printNames(students);</code></pre>
+                <button class="run-btn" onclick="runChallenge5()">הרץ אתגר 5</button>
+                <div class="output" id="outputChallenge5"></div>
+            </div>
+            
+            <div class="note" style="margin-top: 30px; background: #e3f2fd; border-color: #2196f3;">
+                <h4 style="color: #1976d2; margin-bottom: 10px;">למה צריך רקורסיה?</h4>
+                <p><strong>יתרונות:</strong></p>
+                <ul style="margin-right: 20px;">
+                    <li>קוד קצר ואלגנטי לבעיות מורכבות</li>
+                    <li>מושלם למבני נתונים מקוננים (עצים, תיקיות)</li>
+                    <li>פותר בעיות שקשה לפתור עם לולאה רגילה</li>
+                    <li>דוגמאות: חיפוש בעץ, Fibonacci, מיון Merge Sort</li>
+                </ul>
+                
+                <p><strong>בעיות אפשריות:</strong></p>
+                <ul style="margin-right: 20px;">
+                    <li>ביצועים: רקורסיה איטית יותר מלולאה (overhead של קריאות)</li>
+                    <li>זיכרון: כל קריאה נשמרת ב-call stack - יכול להיגמר המקום</li>
+                    <li>Stack Overflow: יותר מדי קריאות רקורסיביות גורמות לקריסה</li>
+                    <li>קשה לדיבוג: צריך לעקוב אחרי הרבה קריאות</li>
+                </ul>
+                
+                <p><strong>כלל אצבע:</strong> השתמשו ברקורסיה כשהבעיה באמת רקורסיבית. אחרת - לולאה פשוטה עדיפה!</p>
+            </div>
+        </div>
+
+        <!-- Slide 15: Homework -->
+        <div class="slide">
+            <h2>שיעורי בית</h2>
+            <ol class="homework-list">
+                <li>עמוד HTML עם כפתור.</li>
+                <li>בלחיצה – לשנות טקסט ולהציג הודעה ב־Console.</li>
+                <li>ליצור <strong>Array (מערך)</strong> עם שמות ולהציגם בלולאה.</li>
+                <li>שימוש נכון ב־<code>let</code>, <code>const</code>, ו־<code>function</code>.</li>
+                <li>עיצוב ב־Flexbox.</li>
+            </ol>
+        </div>
+
+        <!-- Slide 16: Practice Exercises -->
+        <div class="slide">
+            <h2>💪 תרגול עצמי - 20 משימות</h2>
+            <p style="text-align: center; font-size: 1.2rem; background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 30px;">
+                <strong>הוראות:</strong> נסו לפתור את המשימות בעצמכם, ורק אחר כך לחצו על "הצג פתרון" 🎯
+            </p>
+            
+            <!-- Easy Tasks (10) -->
+            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 25px; border-radius: 15px; margin: 20px 0; border: 3px solid #4caf50;">
+                <h3 style="color: #2e7d32; text-align: center; font-size: 1.8rem; margin-bottom: 20px;">✅ קל (Easy) - 10 משימות</h3>
+                
+                <!-- Exercise 1 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣</strong> צרו משתנה בשם <code>myName</code> ושימו בו את השם שלכם. הדפיסו אותו ב-console.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex1')">💡 הצג פתרון</button>
+                    <div id="answer-ex1" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>const myName = "אלכס";
+console.log(myName);</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 2 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>2️⃣</strong> חשבו מה יודפס: <code>console.log(typeof 42)</code></p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex2')">💡 הצג פתרון</button>
+                    <div id="answer-ex2" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>// תשובה: "number"
+console.log(typeof 42); // "number"</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 3 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>3️⃣</strong> יצרו אוביקט <code>car</code> עם: brand="טויוטה", year=2020</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex3')">💡 הצג פתרון</button>
+                    <div id="answer-ex3" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>const car = {
+  brand: "טויוטה",
+  year: 2020
+};</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 4 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>4️⃣</strong> כתבו פונקציה <code>sayHello()</code> שמדפיסה "שלום!"</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex4')">💡 הצג פתרון</button>
+                    <div id="answer-ex4" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function sayHello() {
+  console.log("שלום!");
+}
+sayHello();</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 5 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>5️⃣</strong> מה יחזיר: <code>Boolean("")</code>?</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex5')">💡 הצג פתרון</button>
+                    <div id="answer-ex5" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>// תשובה: false
+// מחרוזת ריקה היא Falsy value</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 6 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>6️⃣</strong> צרו מערך עם 3 פירות והדפיסו את האיבר הראשון.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex6')">💡 הצג פתרון</button>
+                    <div id="answer-ex6" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>const fruits = ["תפוח", "בננה", "תפוז"];
+console.log(fruits[0]); // "תפוח"</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 7 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>7️⃣</strong> השתמשו ב-Template Literal ליצירת: "שלום דני, אתה בן 25"</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex7')">💡 הצג פתרון</button>
+                    <div id="answer-ex7" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>const name = "דני";
+const age = 25;
+console.log(`שלום ${name}, אתה בן ${age}`);</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 8 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>8️⃣</strong> מה ההבדל בין <code>null</code> ל-<code>undefined</code>?</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex8')">💡 הצג פתרון</button>
+                    <div id="answer-ex8" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>// null = "הגדרתי את זה כריק במכוון"
+// undefined = "המשתנה לא קיבל ערך"
+
+let x = null;      // במכוון ריק
+let y;             // undefined (לא הוגדר)</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 9 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>9️⃣</strong> כתבו פונקציה <code>double(x)</code> שמחזירה את המספר כפול 2.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex9')">💡 הצג פתרון</button>
+                    <div id="answer-ex9" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function double(x) {
+  return x * 2;
+}
+console.log(double(5)); // 10</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 10 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>🔟</strong> השתמשו ב-<code>Math.random()</code> ליצירת מספר אקראי בין 1-10.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex10')">💡 הצג פתרון</button>
+                    <div id="answer-ex10" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>const random = Math.floor(Math.random() * 10) + 1;
+console.log(random); // מספר בין 1-10</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Medium Tasks (5) -->
+            <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 25px; border-radius: 15px; margin: 20px 0; border: 3px solid #ff9800;">
+                <h3 style="color: #e65100; text-align: center; font-size: 1.8rem; margin-bottom: 20px;">⚡ בינוני (Medium) - 5 משימות</h3>
+                
+                <!-- Exercise 11 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣1️⃣</strong> כתבו פונקציה שבודקת אם מספר זוגי או אי-זוגי ומחזירה true/false.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex11')">💡 הצג פתרון</button>
+                    <div id="answer-ex11" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function isEven(num) {
+  return num % 2 === 0;
+}
+console.log(isEven(4));  // true
+console.log(isEven(7));  // false</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 12 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣2️⃣</strong> צרו לולאה שמדפיסה את המספרים 1-5 בקונסול.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex12')">💡 הצג פתרון</button>
+                    <div id="answer-ex12" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 13 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣3️⃣</strong> כתבו פונקציה שמקבלת מערך ומחזירה את סכום כל האיברים.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex13')">💡 הצג פתרון</button>
+                    <div id="answer-ex13" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function sumArray(arr) {
+  let sum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i];
+  }
+  return sum;
+}
+console.log(sumArray([1, 2, 3, 4, 5])); // 15</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 14 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣4️⃣</strong> יצרו אוביקט <code>person</code> עם method שמדפיס "שלום, אני [שם]".</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex14')">💡 הצג פתרון</button>
+                    <div id="answer-ex14" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>const person = {
+  name: "דני",
+  greet: function() {
+    console.log(`שלום, אני ${this.name}`);
+  }
+};
+person.greet(); // "שלום, אני דני"</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 15 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣5️⃣</strong> כתבו Arrow Function שמקבלת 3 מספרים ומחזירה את הממוצע.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex15')">💡 הצג פתרון</button>
+                    <div id="answer-ex15" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>const average = (a, b, c) => (a + b + c) / 3;
+
+console.log(average(10, 20, 30)); // 20</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hard Tasks (5) -->
+            <div style="background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%); padding: 25px; border-radius: 15px; margin: 20px 0; border: 3px solid #e74c3c;">
+                <h3 style="color: #c62828; text-align: center; font-size: 1.8rem; margin-bottom: 20px;">🔥 קשה (Hard) - 5 משימות</h3>
+                
+                <!-- Exercise 16 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣6️⃣</strong> כתבו פונקציה שמקבלת מחרוזת ומחזירה אותה הפוך (reverse).</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex16')">💡 הצג פתרון</button>
+                    <div id="answer-ex16" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+console.log(reverseString("שלום")); // "םולש"
+
+// או בלי מתודות מובנות:
+function reverseManual(str) {
+  let result = '';
+  for (let i = str.length - 1; i >= 0; i--) {
+    result += str[i];
+  }
+  return result;
+}</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 17 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣7️⃣</strong> כתבו פונקציה שבודקת אם מילה היא Palindrome (זהה הפוך, כמו "אבא").</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex17')">💡 הצג פתרון</button>
+                    <div id="answer-ex17" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function isPalindrome(word) {
+  const reversed = word.split('').reverse().join('');
+  return word === reversed;
+}
+console.log(isPalindrome("אבא"));   // true
+console.log(isPalindrome("שלום"));  // false</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 18 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣8️⃣</strong> צרו פונקציה <code>factorial(n)</code> שמחשבת עצרת (5! = 5×4×3×2×1 = 120).</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex18')">💡 הצג פתרון</button>
+                    <div id="answer-ex18" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>// דרך 1: רקורסיה
+function factorial(n) {
+  if (n <= 1) return 1;
+  return n * factorial(n - 1);
+}
+
+// דרך 2: לולאה
+function factorialLoop(n) {
+  let result = 1;
+  for (let i = 2; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+console.log(factorial(5)); // 120</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 19 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>1️⃣9️⃣</strong> כתבו פונקציה שמחזירה את המספר השני הכי גדול במערך.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex19')">💡 הצג פתרון</button>
+                    <div id="answer-ex19" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function secondLargest(arr) {
+  // מיון מהגדול לקטן
+  const sorted = [...arr].sort((a, b) => b - a);
+  return sorted[1];
+}
+console.log(secondLargest([10, 5, 8, 20, 3])); // 10
+
+// או בלי sort:
+function secondLargestManual(arr) {
+  let first = -Infinity, second = -Infinity;
+  for (let num of arr) {
+    if (num > first) {
+      second = first;
+      first = num;
+    } else if (num > second && num < first) {
+      second = num;
+    }
+  }
+  return second;
+}</code></pre>
+                    </div>
+                </div>
+                
+                <!-- Exercise 20 -->
+                <div class="exercise-box" style="background: white; margin: 15px 0;">
+                    <p><strong>2️⃣0️⃣</strong> יצרו פונקציה <code>deepEqual</code> שבודקת אם שני אוביקטים זהים לגמרי.</p>
+                    <button class="answer-btn" onclick="toggleAnswer('ex20')">💡 הצג פתרון</button>
+                    <div id="answer-ex20" style="display: none; margin-top: 10px;">
+                        <pre style="background: #1e1e1e; padding: 10px; border-radius: 8px; color: #9CDCFE;"><code>function deepEqual(obj1, obj2) {
+  // דרך פשוטה - JSON
+  return JSON.stringify(obj1) === JSON.stringify(obj2);
+}
+
+// דרך מתקדמת יותר:
+function deepEqualAdvanced(obj1, obj2) {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+  
+  if (keys1.length !== keys2.length) return false;
+  
+  for (let key of keys1) {
+    if (obj1[key] !== obj2[key]) return false;
+  }
+  return true;
+}
+
+const a = {name: "דני", age: 25};
+const b = {name: "דני", age: 25};
+console.log(deepEqual(a, b)); // true</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="final-message" style="margin-top: 40px;">
+                <h3>🎯 כל הכבוד!</h3>
+                <p style="font-size: 1.3rem;">אם פתרתם את כל 20 המשימות - אתם מוכנים להמשיך!</p>
+            </div>
+        </div>
+
+        <!-- Slide 17: Summary -->
+        <div class="slide">
+            <h2>סיכום</h2>
+            <ul class="summary-list">
+                <li>✅ מבנה הקוד של JavaScript</li>
+                <li>✅ סוגי נתונים ודיוק מספרים</li>
+                <li>✅ תקן IEEE 754</li>
+                <li>✅ אינטראקציה עם HTML</li>
+                <li>✅ פונקציות ו־Scope</li>
+            </ul>
+            <div class="final-message">
+                <h3>תודה על ההשתתפות! 🎉</h3>
+                <p>נתראה בשיעור הבא</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="controls">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">❮</button>
+        <span class="slide-counter" id="slideCounter">1 / 17</span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">❯</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Re-highlight code after dynamic content changes
+        if (typeof Prism !== 'undefined') {
+            setTimeout(() => Prism.highlightAll(), 100);
+        }
+    </script>
+</body>
+</html>
+
