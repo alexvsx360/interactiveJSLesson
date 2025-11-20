@@ -1,7 +1,10 @@
 # JavaScript למתחילים - מצגת אינטראקטיבית
 
 מצגת אינטראקטיבית לשיעור 2 בקורס JavaScript למתחילים.
-** [Show Now!]([https://alexvsx360.github.io/interactiveJSLesson])** 
+
+**[Show Now!](https://alexvsx360.github.io/interactiveJSLesson)**
+
+
 ## תכונות
 
 ### 🎨 עיצוב מודרני
